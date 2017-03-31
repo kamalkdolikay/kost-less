@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload-shim.min.js"></script>
+    <!--<script src="/javascripts/angularApp.js"></script>-->
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body ng-app="KD">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <legend>Hello Mr. KD</legend>
+            </div>
+            <div class="col-sm-5">
+                <h4>Add User:</h4>
+                <form ng-controller="main" ng-submit="addusr()">
+                    <div class="panel panel-default">
+                        <div class="panel-body form-horizontal payment-form">
+                            <div class="form-group">
+                                <label for="concept" class="col-sm-3 control-label">Name</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="concept" ng-model="form.user">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="description" class="col-sm-3 control-label">Type</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="description" ng-model="form.type">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="amount" class="col-sm-3 control-label">Password</label>
+                                <div class="col-sm-9">
+                                    <input type="password" class="form-control" id="amount" ng-model="form.pass">
+                                </div>
+                            </div>
+                            <!--<div class="form-group">
+                            <label for="status" class="col-sm-3 control-label">Status</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" id="status" name="status">
+                                    <option>Paid</option>
+                                    <option>Unpaid</option>
+                                </select>
+                            </div>
+                        </div> -->
+                            <div class="form-group">
+                                <div class="col-sm-12 text-right">
+                                    <button type="submit" class="btn btn-default preview-add-button">
+                                    <span class="glyphicon glyphicon-plus"></span> Add
+                                </button>
+                                    <p>{{msg}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-sm-5">
+                <h4>Delete User:</h4>
+                <form ng-controller="main" ng-submit="delusr()">
+                    <div class="panel panel-default">
+                        <div class="panel-body form-horizontal payment-form">
+                            <div class="form-group">
+                                <label for="concept" class="col-sm-3 control-label">Name</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="concept" ng-model="form.name">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12 text-right">
+                                    <button type="submit" class="btn btn-default preview-add-button">
+                                    <span class="glyphicon glyphicon-plus"></span> Delete
+                                </button>
+                                    <p>{{msg}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-5">
+                <h4>Add Product:</h4>
+                <form ng-controller="MyCtrl2 as up">
+                    <div class="panel panel-default">
+                        <div class="panel-body form-horizontal payment-form">
+                            <div class="form-group">
+                                <label for="concept" class="col-sm-3 control-label">ID</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="concept" ng-model="form.id">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="concept" class="col-sm-3 control-label">Name</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="concept" ng-model="form.name">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="concept" class="col-sm-3 control-label">Price</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="concept" ng-model="form.price">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="status" class="col-sm-3 control-label">Category</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" id="status" ng-model="form.category">
+                                <option>Animal</option>
+                                <option>Automobile</option>
+                            </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="concept" class="col-sm-3 control-label">Image</label>
+                                <div class="col-sm-9">
+                                    <input type="file" ngf-select ng-model="form.file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" class="form-control" id="concept" />
+                                    <i ng-show="up.upload_form.file.$error.required">*required</i><br>
+                                    <i ng-show="up.upload_form.file.$error.maxSize">File too large 
+                                {{up.file.size / 1000000|number:1}}MB: max 20M</i>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12 text-right">
+                                    <button type="submit" ng-click="up.submit()" class="btn btn-default preview-add-button">
+                                    <span class="glyphicon glyphicon-plus"></span> Add
+                                </button>
+                                    <p>{{up.progress}}{{msg}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-sm-5">
+                <h4>Delete Product:</h4>
+                <form ng-controller="main" ng-submit="delpro()">
+                    <div class="panel panel-default">
+                        <div class="panel-body form-horizontal payment-form">
+                            <div class="form-group">
+                                <label for="concept" class="col-sm-3 control-label">ID</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="concept" ng-model="form.id">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="concept" class="col-sm-3 control-label">Name</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="concept" ng-model="form.name">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12 text-right">
+                                    <button type="submit" class="btn btn-default preview-add-button">
+                                    <span class="glyphicon glyphicon-plus"></span> Delete
+                                </button>
+                                    <p>{{msg}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="row" ng-controller="main">
+            <div class="col-sm-5">
+                <h4>Show Users:</h4>
+                <div class="panel panel-default">
+                    <div class="panel-body form-horizontal payment-form">
+                        <div class="form-group" ng-repeat="user in users">
+                            <label for="concept" class="col-sm-3 control-label">{{user.username}}</label>
+                            <div class="col-sm-9">
+                                <img src="./images/{{user.image}}" style="width:100px; height:100px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-5" ng-controller="main">
+                <h4>Show Products:</h4>
+                <div class="panel panel-default" ng-controller="main">
+                    <div class="panel-body form-horizontal payment-form">
+                        <div class="form-group" ng-repeat="product in products">
+                            <label for="concept" class="col-sm-3 control-label">{{product.product_name}}</label>
+                            <div class="col-sm-9">
+                                <img src="./images/{{product.image}}" style="width:100px; height:100px;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- container -->
+
+    <!--delete user
+    <form ng-controller="main" ng-submit="delusr()">
+        <input type="text" ng-model="form.name">
+        <input type="submit">
+        {{msg}}
+    </form>
+
+    add user
+    <form ng-controller="main" ng-submit="addusr()">
+        <input type="text" ng-model="form.user" placeholder="name">
+        <input type="text" ng-model="form.type" placeholder="type">
+        <input type="text" ng-model="form.pass" placeholder="password">
+        <input type="submit">
+        {{msg}}
+    </form>
+
+    add product
+    <form ng-controller="main" ng-submit="addpro()">
+        <input type="text" ng-model="form.id" placeholder="id">
+        <input type="text" ng-model="form.name" placeholder="name">
+        <input type="text" ng-model="form.price" placeholder="price">
+        <input type="submit">
+        {{msg}}
+    </form>
+
+    delete product
+    <form ng-controller="main" ng-submit="delpro()">
+        <input type="text" ng-model="form.id" placeholder="id">
+        <input type="text" ng-model="form.name" placeholder="name">
+        <input type="submit">
+        {{msg}}
+    </form>
+
+    add product with image
+    <form ng-controller="MyCtrl2 as up" name="up.upload_form">
+        <input type="text" ng-model="up.id" placeholder="id">
+        <input type="text" ng-model="up.name" placeholder="name">
+        <input type="text" ng-model="up.price" placeholder="price">
+          <input 
+              type="file" ngf-select ng-model="up.file" 
+              name="file" 
+              ngf-pattern="'image/*'"
+              accept="image/*" 
+              ngf-max-size="20MB" 
+              />
+          Image thumbnail: <img style="width:100px;" ng-show="!!up.file" ngf-thumbnail="up.file || '/thumb.jpg'"/>
+          <i ng-show="up.upload_form.file.$error.required">*required</i><br>
+          <i ng-show="up.upload_form.file.$error.maxSize">File too large 
+          {{up.file.size / 1000000|number:1}}MB: max 20M</i>
+          <button type="submit" ng-click="up.submit()">submit</button>
+          <p>{{up.progress}}{{msg}}</p>
+      </form>-->
+
+</body>
+
+<script>
+    var app = angular.module("KD", ['ngFileUpload'])
+
+    app.controller("main", function($scope, $http) {
+        $scope.delusr = function() {
+            $http.post("/delete", $scope.form)
+                .success(function(data) {
+                    console.log("success", data)
+                    if (data.message == "success") {
+                        $scope.msg = "user deleted"
+                    }
+                    if (data.message == "error") {
+                        $scope.msg = "enter a valid user"
+                    }
+                })
+                .error(function(data) {
+                    console.log("error ", data)
+                })
+        }
+
+        $scope.addusr = function() {
+            $http.post("/register", $scope.form)
+                .success(function(data) {
+                    console.log("success ", data)
+                    if (data.message == "user registered") {
+                        $scope.msg = "user registered"
+                    }
+                    if (data.message == 11000) {
+                        $scope.msg = "User already registered"
+                    }
+                })
+                .error(function(data) {
+                    console.log("error ", data)
+                })
+        }
+
+        $scope.addpro = function() {
+            $http.post("/addproduct", $scope.form)
+                .success(function(data) {
+                    console.log("success", data)
+                    if (data.message == "success") {
+                        $scope.msg = "new product added"
+                    }
+                    if (data.message == "error") {
+                        $scope.msg = "try again"
+                    }
+                })
+                .error(function(data) {
+                    console.log("error ", data)
+                })
+        }
+
+        $scope.delpro = function() {
+            $http.post("/delproduct", $scope.form)
+                .success(function(data) {
+                    console.log("success ", data)
+                    if (data.message == "success") {
+                        $scope.msg = "product deleted"
+                    }
+                    if (data.message == "error") {
+                        $scope.msg = "no such product found"
+                    }
+                })
+                .error(function(data) {
+                    console.log("error ", data)
+                })
+        }
+
+        $http.get("/products")
+            .then(function(res) {
+                $scope.products = res.data;
+            })
+
+        $http.get("/posts")
+            .then(function(res) {
+                $scope.users = res.data;
+            })
+
+    })
+
+    app.controller('MyCtrl2', ['Upload', '$window', '$scope', function(Upload, $window, $scope) {
+        var vm = this;
+
+
+        vm.submit = function(file) {
+            Upload.upload({
+                url: 'http://localhost:3000/addproduct',
+                method: 'POST',
+                data: $scope.form
+            }).then(function(resp) {
+                if (resp.data.error_code === 0) {
+                    // $window.alert('Success ' + resp.config.data.file.name + 'uploaded. Response: ');
+                    console.log(resp.config.data.file.name)
+                } else {
+                    $window.alert('an error occured');
+                }
+            }, function(resp) {
+                console.log('Error status: ' + resp.status);
+                $window.alert('Error status: ' + resp.status);
+            }, function(evt) {
+                console.log(evt);
+                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+                vm.progress = 'progress: ' + progressPercentage + '% ';
+            });
+        };
+    }]);
+</script>
+
+</html>

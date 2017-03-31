@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload-shim.min.js"></script>
+    <link href="/stylesheets/dashboard.css" rel='stylesheet' type='text/css'>
+    <!--<script src="/javascripts/angularApp.js"></script>-->
+    <style>
+        .thumb {
+            width: 24px;
+            height: 24px;
+            float: none;
+            position: relative;
+            top: 7px;
+        }
+        
+        .progress div {
+            font-size: smaller;
+            background: orange;
+        }
+    </style>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body ng-app="K">
+    <div class="container">
+        <nav class="navbar navbar-inverse">
+            <div class="navbar-header">
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".js-navbar-collapse">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+                <a class="navbar-brand" href="#">My Store</a>
+            </div>
+
+            <div class="collapse navbar-collapse js-navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown mega-dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Men <span class="caret"></span></a>
+                        <ul class="dropdown-menu mega-dropdown-menu">
+                            <li class="col-sm-3">
+                                <ul>
+                                    <li class="dropdown-header">Men Collection</li>
+                                    <div id="menCollection" class="carousel slide" data-ride="carousel">
+                                        <div class="carousel-inner">
+                                            <div class="item active">
+                                                <a href="#"><img src="http://placehold.it/254x150/ff3546/f5f5f5/&text=New+Collection" class="img-responsive" alt="product 1"></a>
+                                                <h4><small>Summer dress floral prints</small></h4>
+                                                <button class="btn btn-primary" type="button">49,99 €</button> <button href="#" class="btn btn-default" type="button"><span class="glyphicon glyphicon-heart"></span> Add to Wishlist</button>
+                                            </div>
+                                            <!-- End Item -->
+                                            <div class="item">
+                                                <a href="#"><img src="http://placehold.it/254x150/3498db/f5f5f5/&text=New+Collection" class="img-responsive" alt="product 2"></a>
+                                                <h4><small>Gold sandals with shiny touch</small></h4>
+                                                <button class="btn btn-primary" type="button">9,99 €</button> <button href="#" class="btn btn-default" type="button"><span class="glyphicon glyphicon-heart"></span> Add to Wishlist</button>
+                                            </div>
+                                            <!-- End Item -->
+                                            <div class="item">
+                                                <a href="#"><img src="http://placehold.it/254x150/2ecc71/f5f5f5/&text=New+Collection" class="img-responsive" alt="product 3"></a>
+                                                <h4><small>Denin jacket stamped</small></h4>
+                                                <button class="btn btn-primary" type="button">49,99 €</button> <button href="#" class="btn btn-default" type="button"><span class="glyphicon glyphicon-heart"></span> Add to Wishlist</button>
+                                            </div>
+                                            <!-- End Item -->
+                                        </div>
+                                        <!-- End Carousel Inner -->
+                                        <!-- Controls -->
+                                        <a class="left carousel-control" href="#menCollection" role="button" data-slide="prev">
+                                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                        <a class="right carousel-control" href="#menCollection" role="button" data-slide="next">
+                                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                    </div>
+                                    <!-- /.carousel -->
+                                    <li class="divider"></li>
+                                    <li><a href="#">View all Collection <span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
+                                </ul>
+                            </li>
+                            <li class="col-sm-3">
+                                <ul>
+                                    <li class="dropdown-header">Features</li>
+                                    <li><a href="#">Auto Carousel</a></li>
+                                    <li><a href="#">Carousel Control</a></li>
+                                    <li><a href="#">Left & Right Navigation</a></li>
+                                    <li><a href="#">Four Columns Grid</a></li>
+                                    <li class="divider"></li>
+                                    <li class="dropdown-header">Fonts</li>
+                                    <li><a href="#">Glyphicon</a></li>
+                                    <li><a href="#">Google Fonts</a></li>
+                                </ul>
+                            </li>
+                            <li class="col-sm-3">
+                                <ul>
+                                    <li class="dropdown-header">Plus</li>
+                                    <li><a href="#">Navbar Inverse</a></li>
+                                    <li><a href="#">Pull Right Elements</a></li>
+                                    <li><a href="#">Coloured Headers</a></li>
+                                    <li><a href="#">Primary Buttons & Default</a></li>
+                                </ul>
+                            </li>
+                            <li class="col-sm-3">
+                                <ul>
+                                    <li class="dropdown-header">Much more</li>
+                                    <li><a href="#">Easy to Customize</a></li>
+                                    <li><a href="#">Calls to action</a></li>
+                                    <li><a href="#">Custom Fonts</a></li>
+                                    <li><a href="#">Slide down on Hover</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown mega-dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Women <span class="caret"></span></a>
+                        <ul class="dropdown-menu mega-dropdown-menu">
+                            <li class="col-sm-3">
+                                <ul>
+                                    <li class="dropdown-header">Features</li>
+                                    <li><a href="#">Auto Carousel</a></li>
+                                    <li><a href="#">Carousel Control</a></li>
+                                    <li><a href="#">Left & Right Navigation</a></li>
+                                    <li><a href="#">Four Columns Grid</a></li>
+                                    <li class="divider"></li>
+                                    <li class="dropdown-header">Fonts</li>
+                                    <li><a href="#">Glyphicon</a></li>
+                                    <li><a href="#">Google Fonts</a></li>
+                                </ul>
+                            </li>
+                            <li class="col-sm-3">
+                                <ul>
+                                    <li class="dropdown-header">Plus</li>
+                                    <li><a href="#">Navbar Inverse</a></li>
+                                    <li><a href="#">Pull Right Elements</a></li>
+                                    <li><a href="#">Coloured Headers</a></li>
+                                    <li><a href="#">Primary Buttons & Default</a></li>
+                                </ul>
+                            </li>
+                            <li class="col-sm-3">
+                                <ul>
+                                    <li class="dropdown-header">Much more</li>
+                                    <li><a href="#">Easy to Customize</a></li>
+                                    <li><a href="#">Calls to action</a></li>
+                                    <li><a href="#">Custom Fonts</a></li>
+                                    <li><a href="#">Slide down on Hover</a></li>
+                                </ul>
+                            </li>
+                            <li class="col-sm-3">
+                                <ul>
+                                    <li class="dropdown-header">Women Collection</li>
+                                    <div id="womenCollection" class="carousel slide" data-ride="carousel">
+                                        <div class="carousel-inner">
+                                            <div class="item active">
+                                                <a href="#"><img src="http://placehold.it/254x150/3498db/f5f5f5/&text=New+Collection" class="img-responsive" alt="product 1"></a>
+                                                <h4><small>Summer dress floral prints</small></h4>
+                                                <button class="btn btn-primary" type="button">49,99 €</button> <button href="#" class="btn btn-default" type="button"><span class="glyphicon glyphicon-heart"></span> Add to Wishlist</button>
+                                            </div>
+                                            <!-- End Item -->
+                                            <div class="item">
+                                                <a href="#"><img src="http://placehold.it/254x150/ff3546/f5f5f5/&text=New+Collection" class="img-responsive" alt="product 2"></a>
+                                                <h4><small>Gold sandals with shiny touch</small></h4>
+                                                <button class="btn btn-primary" type="button">9,99 €</button> <button href="#" class="btn btn-default" type="button"><span class="glyphicon glyphicon-heart"></span> Add to Wishlist</button>
+                                            </div>
+                                            <!-- End Item -->
+                                            <div class="item">
+                                                <a href="#"><img src="http://placehold.it/254x150/2ecc71/f5f5f5/&text=New+Collection" class="img-responsive" alt="product 3"></a>
+                                                <h4><small>Denin jacket stamped</small></h4>
+                                                <button class="btn btn-primary" type="button">49,99 €</button> <button href="#" class="btn btn-default" type="button"><span class="glyphicon glyphicon-heart"></span> Add to Wishlist</button>
+                                            </div>
+                                            <!-- End Item -->
+                                        </div>
+                                        <!-- End Carousel Inner -->
+                                        <!-- Controls -->
+                                        <a class="left carousel-control" href="#womenCollection" role="button" data-slide="prev">
+                                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                        <a class="right carousel-control" href="#womenCollection" role="button" data-slide="next">
+                                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                    </div>
+                                    <!-- /.carousel -->
+                                    <li class="divider"></li>
+                                    <li><a href="#">View all Collection <span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Store locator</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right" ng-controller="MainCtrl">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">My account <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="" ng-click="logout()">logout</a></li>
+                </ul>
+            </div>
+            <!-- /.nav-collapse -->
+        </nav>
+        <div class="row">
+            <div class="col-sm-6 col-md-4 col-lg-3 mt-4" ng-controller="MainCtrl">
+                <div class="card card-inverse card-info">
+                    <img class="card-img-top" src="./images/{{settings.image}}">
+                    <div class="card-block">
+                        <figure class="profile">
+                            <img src="http://success-at-work.com/wp-content/uploads/2015/04/free-stock-photos.gif" class="profile-avatar" alt="">
+                        </figure>
+                        <h4 class="card-title mt-3">{{settings.username}}</h4>
+                        <div class="meta card-text">
+                            <a>Friends</a>
+                        </div>
+                        <div class="card-text">
+                            Thy shall not enter this profile
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <!--<small>Last updated 3 mins ago</small>
+                            <button class="btn btn-info float-right btn-sm">Follow</button>-->
+                        <form ng-controller="MyCtrl2 as up" name="up.upload_form" ng-submit="up.submit()">
+                            <input type="file" ngf-select ng-model="form.file" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" required/>
+                            <!--Image thumbnail: <img style="width:100px;" ng-show="!!form.file" ngf-thumbnail="form.file || '/thumb.jpg'"/>-->
+                            <i ng-show="up.upload_form.file.$error.required">*required</i><br>
+                            <i ng-show="up.upload_form.file.$error.maxSize">File too large
+                                {{up.file.size / 1000000|number:1}}MB: max 20M</i>
+                            <button class="btn btn-info float-right btn-sm" type="submit">change</button>
+                            <p>{{up.progress}}</p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-5" ng-controller="MainCtrl">
+                <h4>Edit Details:</h4>
+                <form ng-submit="sub()">
+                    <div class="panel panel-default">
+                        <div class="panel-body form-horizontal payment-form">
+                            <div class="form-group">
+                                <label for="concept" class="col-sm-3 control-label">Name</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="concept" ng-model="form.user">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="concept" class="col-sm-3 control-label">Password</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="concept" ng-model="form.pass">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12 text-right">
+                                    <button type="submit" class="btn btn-default preview-add-button">
+                                    <span class="glyphicon glyphicon-plus"></span> Edit
+                                </button>
+                                    <p>{{msg}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-sm-5" ng-controller="MainCtrl">
+                <h4>Order Product:</h4>
+                <form ng-submit="order()">
+                    <div class="panel panel-default">
+                        <div class="panel-body form-horizontal payment-form">
+                            <div class="form-group">
+                                <label for="concept" class="col-sm-3 control-label">Name</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="concept" ng-model="form.name">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12 text-right">
+                                    <button type="submit" class="btn btn-default preview-add-button">
+                                    <span class="glyphicon glyphicon-plus"></span> Purchase
+                                </button>
+                                    <p>{{msg}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <!-- row -->
+
+        <div class="row">
+            <div class="col-sm-5" ng-controller="MainCtrl">
+                <h4>Edit Details:</h4>
+                <form ng-submit="sub()">
+                    <div class="panel panel-default">
+                        <div class="panel-body form-horizontal payment-form">
+                            <div class="form-group">
+                                <label for="concept" class="col-sm-3 control-label">Name</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="concept" ng-model="form.user">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="concept" class="col-sm-3 control-label">Password</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="concept" ng-model="form.pass">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12 text-right">
+                                    <button type="submit" class="btn btn-default preview-add-button">
+                                    <span class="glyphicon glyphicon-plus"></span> Edit
+                                </button>
+                                    <p>{{msg}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="col-sm-5" ng-controller="MainCtrl">
+                <h4>Order Product:</h4>
+                <form ng-submit="order()">
+                    <div class="panel panel-default">
+                        <div class="panel-body form-horizontal payment-form">
+                            <div class="form-group">
+                                <label for="concept" class="col-sm-3 control-label">Name</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="concept" ng-model="form.name">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-12 text-right">
+                                    <button type="submit" class="btn btn-default preview-add-button">
+                                    <span class="glyphicon glyphicon-plus"></span> Purchase
+                                </button>
+                                    <p>{{msg}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+        <!-- row -->
+
+
+
+        <!--<form ng-controller="MyCtrl2 as up">
+                    <input
+                        type="file"
+                        ngf-select
+                        ng-model="form.file"
+                        ngf-pattern="'image/*'"
+                        accept="image/*"
+                        ngf-max-size="20MB"
+                        />
+                    Image thumbnail: <img style="width:100px;" ng-show="!!up.file" ngf-thumbnail="up.file || '/thumb.jpg'"/>
+                    <i ng-show="up.upload_form.file.$error.required">*required</i><br>
+                    <i ng-show="up.upload_form.file.$error.maxSize">File too large
+                    {{up.file.size / 1000000|number:1}}MB: max 20M</i>
+                    <button type="submit" ng-click="up.submit()">submit</button>
+                    <p>{{up.progress}}</p>
+                </form>-->
+
+        <div class="row">
+            <div class="panel panel-primary filterable">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Products</h3>
+                    <div class="pull-right">
+                        <!--<button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>-->
+                    </div>
+                </div>
+                <table class="table" ng-controller="MainCtrl">
+                    <thead>
+                        <tr class="filters">
+                            <th><input type="text" class="form-control" placeholder="#" disabled></th>
+                            <th><input type="text" class="form-control" placeholder="Name" disabled></th>
+                            <th><input type="text" class="form-control" placeholder="Price" disabled></th>
+                            <th><input type="text" class="form-control" placeholder="Image" disabled></th>
+                        </tr>
+                    </thead>
+                    <tbody ng-repeat="product in products">
+                        <tr>
+                            <td>{{product.product_id}}</td>
+                            <td>{{product.product_name}}</td>
+                            <td>{{product.product_price}}</td>
+                            <td><img src="./images/{{product.image}}" style="width:100px; height:100px;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">My Orders</h3>
+                    <div class="pull-right">
+                        <!--<span class="clickable filter" data-toggle="tooltip" title="Toggle table filter" data-container="body">
+								<i class="glyphicon glyphicon-filter"></i>
+							</span>-->
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <input type="text" class="form-control" id="task-table-filter" data-action="filter" data-filters="#task-table" placeholder="Filter Orders" />
+                </div>
+                <table class="table table-hover" id="task-table" ng-controller="MainCtrl">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Image</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-repeat="order in orders">
+                        <tr>
+                            <td>1</td>
+                            <td>{{order.product_id.product_name}}</td>
+                            <td>{{order.product_id.product_price}}</td>
+                            <td><img src="./images/{{order.product_id.image}}" style="width:100px; height:100px;"></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+    <!-- container -->
+</body>
+<script>
+    var app = angular.module('K', ['ngFileUpload'])
+
+    app.controller('MainCtrl', [
+        '$scope', '$http',
+        function($scope, $http) {
+            $scope.test = 'Hello world!';
+            $scope.sub = function() {
+                $http.post('/cpost', $scope.form)
+                    .success(function(data) {
+                        console.log("success ", data)
+                        if (data.message == "success") {
+                            $scope.msg = "User edited"
+                        }
+                    })
+                    .error(function(data) {
+                        console.log("error ", data)
+                    });
+            }
+            $http.get('/cpost')
+                .then(function(res) {
+                    $scope.settings = res.data;
+                });
+
+            $http.get("/products")
+                .then(function(res) {
+                    $scope.products = res.data;
+                })
+
+            $http.get("/corders")
+                .then(function(res) {
+                    $scope.orders = res.data;
+                })
+
+            $scope.logout = function() {
+                $http.get("/logout")
+                    .then(function(res) {
+                        console.log(res)
+                        window.location.href = 'http://localhost:3000/#/login2';
+                    })
+            }
+
+            $scope.order = function() {
+                $http.post("/orders", $scope.form)
+                    .success(function(data) {
+                        console.log("success ", data)
+                        if (data.message == "success") {
+                            $scope.msg = "order successfull"
+                        }
+                    })
+                    .error(function(data) {
+                        console.log("error ", data)
+                    })
+            }
+
+        }
+    ])
+
+    app.controller('MyCtrl2', ['Upload', '$window', '$scope', function(Upload, $window, $scope) {
+        var vm = this;
+        vm.submit = function() { //function to call on form submit
+            if (vm.upload_form.file.$valid && vm.file) { //check if from is valid
+                vm.upload(vm.file); //call upload function
+            }
+        }
+
+        vm.submit = function(file) {
+            Upload.upload({
+                url: 'http://localhost:3000/upload',
+                method: 'POST',
+                data: $scope.form
+            }).then(function(resp) {
+                if (resp.data.error_code === 0) {
+                    $window.alert('Success ' + resp.config.data.file.name + 'uploaded. Response: ');
+                    console.log(resp.config.data.file.name)
+                } else {
+                    $window.alert('an error occured');
+                }
+            }, function(resp) {
+                console.log('Error status: ' + resp.status);
+                $window.alert('Error status: ' + resp.status);
+            }, function(evt) {
+                console.log(evt);
+                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+                vm.progress = 'progress: ' + progressPercentage + '% ';
+            });
+        };
+    }]);
+</script>
+
+</html>
+
+<style>
+    @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
+    body {
+        font-family: 'Open Sans', 'sans-serif';
+    }
+    
+    .mega-dropdown {
+        position: static !important;
+    }
+    
+    .mega-dropdown-menu {
+        padding: 20px 0px;
+        width: 100%;
+        box-shadow: none;
+        -webkit-box-shadow: none;
+    }
+    
+    .mega-dropdown-menu>li>ul {
+        padding: 0;
+        margin: 0;
+    }
+    
+    .mega-dropdown-menu>li>ul>li {
+        list-style: none;
+    }
+    
+    .mega-dropdown-menu>li>ul>li>a {
+        display: block;
+        color: #222;
+        padding: 3px 5px;
+    }
+    
+    .mega-dropdown-menu>li ul>li>a:hover,
+    .mega-dropdown-menu>li ul>li>a:focus {
+        text-decoration: none;
+    }
+    
+    .mega-dropdown-menu .dropdown-header {
+        font-size: 18px;
+        color: #ff3546;
+        padding: 5px 60px 5px 5px;
+        line-height: 30px;
+    }
+    
+    .carousel-control {
+        width: 30px;
+        height: 30px;
+        top: -35px;
+    }
+    
+    .left.carousel-control {
+        right: 30px;
+        left: inherit;
+    }
+    
+    .carousel-control .glyphicon-chevron-left,
+    .carousel-control .glyphicon-chevron-right {
+        font-size: 12px;
+        background-color: #fff;
+        line-height: 30px;
+        text-shadow: none;
+        color: #333;
+        border: 1px solid #ddd;
+    }
+</style>
+
+<script>
+    $(document).ready(function() {
+        $(".dropdown").hover(
+            function() {
+                $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true, true).slideDown("400");
+                $(this).toggleClass('open');
+            },
+            function() {
+                $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true, true).slideUp("400");
+                $(this).toggleClass('open');
+            }
+        );
+    });
+</script>
