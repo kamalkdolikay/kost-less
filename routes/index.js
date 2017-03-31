@@ -8,8 +8,6 @@ var User = mongoose.model('User')
 var Product = mongoose.model('Product')
 var Order = mongoose.model('Order')
 
-
-
 var datetimestamp = Date.now();
 var storage = multer.diskStorage({
     destination: function(req, file, cb) {
