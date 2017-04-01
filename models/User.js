@@ -1,6 +1,6 @@
-var mongoose = require('mongoose')
+var mongoose = require('mongoose');
 
-var Schema = mongoose.Schema
+var Schema = mongoose.Schema;
 /*var UserSchema = new Schema({
     username: String,
     password: String,
@@ -10,11 +10,10 @@ var Schema = mongoose.Schema
 mongoose.model('User', UserSchema, 'User')*/
 
 var UserSchema = new Schema({
-    username: {type: String, unique: true},
+    username: { type: String, unique: true },
     password: String,
     image: String,
     type: String
-})
+});
 
-mongoose.model('User', UserSchema, 'User')
-
+mongoose.model('User', UserSchema, 'User');

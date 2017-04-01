@@ -1,6 +1,6 @@
-var mongoose = require('mongoose')
+var mongoose = require('mongoose');
 
-var Schema = mongoose.Schema
+var Schema = mongoose.Schema;
 
 var ProductSchema = new Schema({
     product_id: { type: Number, unique: true },
@@ -8,6 +8,6 @@ var ProductSchema = new Schema({
     product_price: Number,
     product_category: String,
     image: String
-})
+});
 
-mongoose.model('Product', ProductSchema, 'Product')
+mongoose.model('Product', ProductSchema, 'Product');

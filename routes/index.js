@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
-var mongoose = require('mongoose')
-var passport = require('passport')
-var multer = require('multer')
+var mongoose = require('mongoose');
+var passport = require('passport');
+var multer = require('multer');
 
-var User = mongoose.model('User')
-var Product = mongoose.model('Product')
-var Order = mongoose.model('Order')
+var User = mongoose.model('User');
+var Product = mongoose.model('Product');
+var Order = mongoose.model('Order');
 
 var datetimestamp = Date.now();
 var storage = multer.diskStorage({
@@ -40,41 +40,41 @@ router.get('/admin', function(req, res, next) {
 /* GET posts page. */
 router.get('/posts', function(req, res) {
     User.find({}, function(err, docs) {
-        res.send(docs)
-    })
-})
+        res.send(docs);
+    });
+});
 
 /* GET posts page. */
 router.get('/products', function(req, res) {
     Product.find({}, function(err, docs) {
-        res.send(docs)
-    })
-})
+        res.send(docs);
+    });
+});
 
 /* GET orders page. */
-router.get("/orders", (req, res) => {
+router.get("/orders", function(req, res) {
     Order.find({}, function(err, data) {
-        res.send(data)
-    })
-})
+        res.send(data);
+    });
+});
 
 /* GET orders page. */
-router.get("/corders", (req, res) => {
+router.get("/corders", function(req, res) {
     Order.find({ "user_id": req.session.passport.user }).populate("user_id").populate("product_id").exec(function(err, docs) {
         if (err) {
-            res.json({ "err": err })
+            res.json({ "err": err });
         } else {
-            res.json(docs)
+            res.json(docs);
         }
-    })
-})
+    });
+});
 
 /* GET posts page. */
-router.get("/cpost", (req, res) => {
+router.get("/cpost", function(req, res) {
     User.findById({ "_id": req.session.passport.user }, function(err, data) {
-        res.send(data)
-    })
-})
+        res.send(data);
+    });
+});
 
 router.get('/logout', function(req, res) {
     req.session.destroy(function(err) {
@@ -83,41 +83,41 @@ router.get('/logout', function(req, res) {
 });
 
 /* POST cpost page. */
-router.post("/cpost", (req, res) => {
+router.post("/cpost", function(req, res) {
     User.findByIdAndUpdate(req.session.passport.user, { $set: { username: req.body.user, password: req.body.pass } }, function(err, docs) {
-        console.log(docs)
-        if (docs == null) {
-            res.json({ "err": err })
+        console.log(docs);
+        if (docs === null) {
+            res.json({ "err": err });
         } else {
             res.json({ "message": "success" });
         }
 
-    })
-})
+    });
+});
 
 /* POST register page. */
 router.post('/register', function(req, res, next) {
     passport.authenticate('register', function(err, user, info) {
-        console.log("err ", err)
-        console.log("user ", user)
+        console.log("err ", err);
+        console.log("user ", user);
         if (err) {
             return next(err);
         }
         if (!user) {
             var lol = info.alert.code;
-            return res.send({ success: false, message: lol })
+            return res.send({ success: false, message: lol });
         } else {
             return res.send({ success: true, message: 'user registered' });
         }
     })(req, res, next);
-})
+});
 
 /* POST login page. */
 router.post('/login', function(req, res, next) {
     passport.authenticate('login', function(err, user, info) {
-        console.log("err ", err)
-        console.log("user ", user)
-        console.log("info ", info)
+        console.log("err ", err);
+        console.log("user ", user);
+        console.log("info ", info);
         if (err) {
             return next(err);
         }
@@ -139,22 +139,22 @@ router.post('/login', function(req, res, next) {
 /* POST upload page. */
 router.post('/upload', function(req, res) {
     upload(req, res, function(err) {
-        console.log("file", req.file)
-        console.log("all", req.body)
+        console.log("file", req.file);
+        console.log("all", req.body);
         if (err) {
             res.json({ error_code: 1, err_desc: err });
             return;
         } else {
             //console.log(datetimestamp)
             User.findByIdAndUpdate(req.session.passport.user, { $set: { image: req.file.filename } }, function(err, docs) {
-                console.log(docs)
-                if (docs == null) {
-                    res.json({ "err": err })
+                console.log(docs);
+                if (docs === null) {
+                    res.json({ "err": err });
                 } else {
                     res.json({ error_code: 0, err_desc: null });
                 }
 
-            })
+            });
 
         }
     });
@@ -162,28 +162,28 @@ router.post('/upload', function(req, res) {
 
 /* POST delete page. */
 router.post("/delete", function(req, res) {
-    console.log("session ", req.session.passport.user)
-    console.log("req name ", req.body.name)
+    console.log("session ", req.session.passport.user);
+    console.log("req name ", req.body.name);
     if (req.session) {
         if (req.session.passport.user) {
             User.findOneAndRemove({ username: req.body.name }, function(err, docs) {
-                if (docs == null) {
-                    res.json({ "message": "error" })
+                if (docs === null) {
+                    res.json({ "message": "error" });
                 } else {
-                    res.json({ "message": "success" })
+                    res.json({ "message": "success" });
                 }
-            })
+            });
         } else {
-            res.json({ "message": "please login" })
+            res.json({ "message": "please login" });
         }
     }
-})
+});
 
 router.post("/addproduct", function(req, res) {
     upload(req, res, function(err) {
-        console.log("name", req.body.name)
-        console.log("all", req.body)
-        console.log("file", req.file)
+        console.log("name", req.body.name);
+        console.log("all", req.body);
+        console.log("file", req.file);
         if (err) {
             res.json({ error_code: 1, err_desc: err });
             return;
@@ -195,38 +195,38 @@ router.post("/addproduct", function(req, res) {
                 product_category: req.body.category,
                 image: req.file.filename
             }).save(function(err, docs) {
-                if (docs == null) {
-                    res.json({ "message": "error" })
+                if (docs === null) {
+                    res.json({ "message": "error" });
                 } else {
                     res.json({ error_code: 0, err_desc: null });
                 }
-            })
+            });
 
         }
     });
-})
+});
 
 router.post("/delproduct", function(req, res) {
-    console.log("id", req.body.id)
-    console.log("name", req.body.name)
+    console.log("id", req.body.id);
+    console.log("name", req.body.name);
     Product.findOneAndRemove({ product_id: req.body.id, product_name: req.body.name }, function(err, docs) {
-        console.log("error ", err)
-        console.log("data ", docs)
-        if (docs == null) {
-            res.json({ "message": "error" })
+        console.log("error ", err);
+        console.log("data ", docs);
+        if (docs === null) {
+            res.json({ "message": "error" });
         } else {
-            res.json({ "message": "success" })
+            res.json({ "message": "success" });
         }
-    })
-})
+    });
+});
 
 router.post("/orders", function(req, res) {
     Product.find({ product_name: req.body.name }, function(err, docs) {
         if (err) {
-            res.json({ "err": err })
+            res.json({ "err": err });
         } else {
-            var id = docs[0]["_id"]
-            var price = docs[0]["product_price"]
+            var id = docs[0]["_id"];
+            var price = docs[0]["product_price"];
             if (req.session) {
                 Order({
                     product_id: id,
@@ -234,17 +234,17 @@ router.post("/orders", function(req, res) {
                     user_id: req.session.passport.user
                 }).save(function(err, docs) {
                     if (err) {
-                        res.json({ "message": "error" })
+                        res.json({ "message": "error" });
                     } else {
-                        res.json({ "message": "success" })
+                        res.json({ "message": "success" });
                     }
-                })
+                });
             } else {
-                res.json({ "err": "please login" })
+                res.json({ "err": "please login" });
             }
         }
-    })
-})
+    });
+});
 
 
 
