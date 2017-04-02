@@ -4,7 +4,6 @@
 <head>
     <title>Add / List Data (AngularJS)</title>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/angularjs-datepicker/2.1.16/angular-datepicker.min.js"></script>
     <style>
         .list_data {
             margin-bottom: 2rem
@@ -83,47 +82,19 @@
         <button ng-click="addItem()">Add</button>
     </div>
 
-    <div ng-controller="mainController as vm">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h3>Product List</h3>
-                        </div>
-                        <div class="row">
-                            <br>
-                            <div class="col-lg-3 text-right">
-                                <h4>Filter by date :</h4>
-                            </div>
-                            <div class="col-lg-6">
-                                <input date-range-picker name="daterange3" class="form-control date-picker" type="text" ng-model="date" options="opts" clearable="true" required/>
-                            </div>
-                        </div>
-                        <div class="panel-body">
-                            <table class="table table-responsive">
-                                <thead>
-                                    <tr>
-                                        <th>Product</th>
-                                        <th>Code</th>
-                                        <th>Availabel</th>
-                                        <th>Price</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="product in vm.products">
-                                        <td>{{product.productName}}</td>
-                                        <td>{{product.productCode}}</td>
-                                        <td>{{product.releaseDate | date }}</td>
-                                        <td>{{product.price | currency}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div ng-controller="myCtrl">
+        <div class="col-md-3 form-group">
+            <input type="date" class="form-control" ng-model="from">
         </div>
+        <div class="col-md-3 form-group">
+            <input type="date" class="form-control" ng-model="to">
+        </div>
+        <table>
+            <tr ng-repeat="item in records | dateFilter:from:to">
+                <td>{{item.state}}</td>
+                <td>{{item.date}}</td>
+            </tr>
+        </table>
     </div>
 
 
@@ -138,11 +109,13 @@
             state: 'CA',
             price: 22,
             tax: 5,
+            date: "03/27/2017",
             include: false
         }, {
             state: 'MA',
             price: 32,
             tax: 8,
+            date: "03/28/2017",
             include: false
         }];
         // Total prices
@@ -203,6 +176,18 @@
         }
     }])
 
+    app.filter("dateFilter", function() {
+        return function datefilter(items, from, to) {
+            var result = [];
+            angular.forEach(items, function(value) {
+                if (Date.parse(value.date) > Date.parse(from) && Date.parse(to) > Date.parse(value.date)) {
+                    result.push(value);
+                }
+            });
+            return result;
+        };
+    });
+
     app.controller("myCtrl", function($scope, $http) {
         //$scope.products = ["Milk", "Bread", "Cheese"];
         $http.get("/products")
@@ -216,8 +201,11 @@
                     console.log("success", data)
                     $scope.products.push(data);
                 })
-
         }
+
+        $scope.from = new Date();
+        $scope.from.setMonth($scope.from.getMonth() - 1);
+        $scope.to = new Date();
     });
 </script>
 

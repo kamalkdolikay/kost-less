@@ -272,8 +272,8 @@
                                         <div class="form-group">
                                             <div class="col-sm-12 text-right">
                                                 <button type="submit" class="btn btn-default preview-add-button">
-                                    <span class="glyphicon glyphicon-plus"></span> Purchase
-                                </button>
+                                                    <span class="glyphicon glyphicon-plus"></span> Purchase
+                                                </button>
                                                 <p>{{msg}}</p>
                                             </div>
                                         </div>
@@ -282,6 +282,19 @@
                             </form>
                         </div>
 
+                        <div ng-controller="MainCtrl">
+                            <div class="col-md-3 form-group">
+                                <input type="date" class="form-control" ng-model="from">
+                            </div>
+                            <div class="col-md-3 form-group">
+                                <input type="date" class="form-control" ng-model="to">
+                            </div>
+                            <table>
+                                <tr ng-repeat="item in prods | dateFilter:from:to">
+                                    <td>{{item.date}}</td>
+                                </tr>
+                            </table>
+                        </div>
 
                     </div>
                 </div>

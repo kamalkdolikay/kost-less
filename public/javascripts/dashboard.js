@@ -48,10 +48,10 @@ app.controller('MainCtrl', [
                 $scope.form.about = res.data.aboutme;
             });
 
-        // $http.get("/products")
-        //     .then(function(res) {
-        //         $scope.products = res.data;
-        //     })
+        $http.get("/products")
+            .then(function(res) {
+                $scope.prods = res.data;
+            })
 
         $http.get("/corders")
             .then(function(res) {
@@ -78,6 +78,10 @@ app.controller('MainCtrl', [
                     console.log("error ", data)
                 })
         }
+
+        $scope.from = new Date();
+        $scope.from.setMonth($scope.from.getMonth() - 1);
+        $scope.to = new Date();
 
     }
 ])
@@ -163,3 +167,15 @@ app.controller('MyCtrl2', ['Upload', '$window', '$scope', function(Upload, $wind
         });
     };
 }]);
+
+app.filter("dateFilter", function() {
+    return function datefilter(items, from, to) {
+        var result = [];
+        angular.forEach(items, function(value) {
+            if (Date.parse(value.date) > Date.parse(from) && Date.parse(to) > Date.parse(value.date)) {
+                result.push(value);
+            }
+        });
+        return result;
+    };
+});
