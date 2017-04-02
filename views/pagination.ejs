@@ -1,0 +1,130 @@
+<!doctype html>
+<html ng-app="plunker">
+
+<head>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.11.0.js"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div ng-controller="PaginationDemoCtrl">
+        <table class="table">
+            <tr ng-repeat="row in products.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))">
+                <td>{{row.product_id}}</td>
+                <td>{{row.product_name}}</td>
+                <td>{{row.product_price}}</td>
+                <td>{{row.product_category}}</td>
+                <td>{{row.image}}</td>
+            </tr>
+        </table>
+        View <select ng-model="viewby" ng-change="setItemsPerPage(viewby)"><option>3</option><option>5</option><option>10</option><option>20</option><option>30</option><option>40</option><option>50</option></select> records at a time.
+
+        <pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" class="pagination-sm" items-per-page="itemsPerPage"></pagination>
+        <pre>The selected page no: {{currentPage}}</pre>
+        <button class="btn btn-info" ng-click="setPage(3)">Set current page to: 3</button>
+
+        <hr />
+        <h4>Pager</h4>
+        <pager total-items="totalItems" ng-model="currentPage" items-per-page="itemsPerPage"></pager>
+
+        <hr />
+        <h4>Limit the maximum visible buttons</h4>
+        <pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" items-per-page="itemsPerPage"></pagination>
+        <pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" items-per-page="itemsPerPage"></pagination>
+        <pre>Page: {{currentPage}} / {{numPages}}</pre>
+    </div>
+
+    <div ng-controller="InstantSearchController">
+        <div class="bar">
+            <!-- Create a binding between the searchString model and the text field -->
+            <input type="text" ng-model="searchString" placeholder="Enter your search terms" />
+        </div>
+
+        <ul>
+            <!-- Render a li element for every entry in the items array. Notice
+				 the custom search filter "searchFor". It takes the value of the
+				 searchString model as an argument.
+			 -->
+            <li ng-repeat="i in items | searchFor:searchString">
+                <a href="{{i.url}}"><img ng-src="./images/{{i.image}}" style="height:100px; width:100px;" /></a>
+                <p>{{i.title}}</p>
+            </li>
+        </ul>
+    </div>
+</body>
+
+<script>
+    var app = angular.module('plunker', ['ui.bootstrap']);
+    var PaginationDemoCtrl = function($scope, $http) {
+        $http.get("/products")
+            .then(function(res) {
+                $scope.products = res.data;
+                $scope.viewby = 1; //view
+                $scope.totalItems = $scope.products.length;
+                $scope.currentPage = 4;
+                $scope.itemsPerPage = $scope.viewby;
+                $scope.maxSize = 5; //Number of pager buttons to show
+
+                $scope.setPage = function(pageNo) {
+                    $scope.currentPage = pageNo;
+                };
+
+                $scope.pageChanged = function() {
+                    console.log('Page changed to: ' + $scope.currentPage);
+                };
+
+                $scope.setItemsPerPage = function(num) {
+                    $scope.itemsPerPage = num;
+                    $scope.currentPage = 1; //reset to first page
+                }
+            })
+    };
+
+    app.filter('searchFor', function() {
+
+        // All filters must return a function. The first parameter
+        // is the data that is to be filtered, and the second is an
+        // argument that may be passed with a colon (searchFor:searchString)
+
+        return function(arr, searchString) {
+
+            if (!searchString) {
+                return arr;
+            }
+
+            var result = [];
+
+            searchString = searchString.toLowerCase();
+
+            // Using the forEach helper method to loop through the array
+            angular.forEach(arr, function(item) {
+
+                if (item.product_name.toLowerCase().indexOf(searchString) !== -1) {
+                    result.push(item);
+                }
+
+            });
+
+            return result;
+        };
+
+    });
+
+    function InstantSearchController($scope, $http) {
+
+        // The data model. These items would normally be requested via AJAX,
+        // but are hardcoded here for simplicity. See the next example for
+        // tips on using AJAX.
+        $http.get("/products")
+            .then(function(res) {
+                $scope.items = res.data;
+            })
+
+
+
+    }
+</script>
+
+</html>

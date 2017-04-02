@@ -2,631 +2,415 @@
 <html>
 
 <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="assets/img/favicon.ico">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title></title>
-    <base href="/">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    <link href="assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
+    <script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload-shim.min.js"></script>
+    <script src="/assets/js/bootstrap-checkbox-radio-switch.js"></script>
     <link href="/stylesheets/dashboard.css" rel='stylesheet' type='text/css'>
-    <!--<script src="/javascripts/angularApp.js"></script>-->
-    <style>
-        .thumb {
-            width: 24px;
-            height: 24px;
-            float: none;
-            position: relative;
-            top: 7px;
-        }
-
-        .progress div {
-            font-size: smaller;
-            background: orange;
-        }
-    </style>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link href="/assets/css/animate.min.css" rel='stylesheet' type='text/css'>
+    <link href="/assets/css/light-bootstrap-dashboard.css" rel='stylesheet' type='text/css'>
+    <script src="/javascripts/dashboard.js"></script>
+    <!--<link rel='stylesheet' href='/stylesheets/style.css' />-->
 </head>
 
 <body ng-app="K">
-    <div class="container">
-        <nav class="navbar navbar-inverse">
-            <div class="navbar-header">
-                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".js-navbar-collapse">
-			<span class="sr-only">Toggle navigation</span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-			<span class="icon-bar"></span>
-		</button>
-                <a class="navbar-brand" href="#">My Store</a>
-            </div>
+    <div class="wrapper">
+        <div class="sidebar" data-color="purple" data-image="assets/img/sidebar-5.jpg">
 
-            <div class="collapse navbar-collapse js-navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li class="dropdown mega-dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Men <span class="caret"></span></a>
-                        <ul class="dropdown-menu mega-dropdown-menu">
-                            <li class="col-sm-3">
-                                <ul>
-                                    <li class="dropdown-header">Men Collection</li>
-                                    <div id="menCollection" class="carousel slide" data-ride="carousel">
-                                        <div class="carousel-inner">
-                                            <div class="item active">
-                                                <a href="#"><img src="http://placehold.it/254x150/ff3546/f5f5f5/&text=New+Collection" class="img-responsive" alt="product 1"></a>
-                                                <h4><small>Summer dress floral prints</small></h4>
-                                                <button class="btn btn-primary" type="button">49,99 €</button> <button href="#" class="btn btn-default" type="button"><span class="glyphicon glyphicon-heart"></span> Add to Wishlist</button>
-                                            </div>
-                                            <!-- End Item -->
-                                            <div class="item">
-                                                <a href="#"><img src="http://placehold.it/254x150/3498db/f5f5f5/&text=New+Collection" class="img-responsive" alt="product 2"></a>
-                                                <h4><small>Gold sandals with shiny touch</small></h4>
-                                                <button class="btn btn-primary" type="button">9,99 €</button> <button href="#" class="btn btn-default" type="button"><span class="glyphicon glyphicon-heart"></span> Add to Wishlist</button>
-                                            </div>
-                                            <!-- End Item -->
-                                            <div class="item">
-                                                <a href="#"><img src="http://placehold.it/254x150/2ecc71/f5f5f5/&text=New+Collection" class="img-responsive" alt="product 3"></a>
-                                                <h4><small>Denin jacket stamped</small></h4>
-                                                <button class="btn btn-primary" type="button">49,99 €</button> <button href="#" class="btn btn-default" type="button"><span class="glyphicon glyphicon-heart"></span> Add to Wishlist</button>
-                                            </div>
-                                            <!-- End Item -->
-                                        </div>
-                                        <!-- End Carousel Inner -->
-                                        <!-- Controls -->
-                                        <a class="left carousel-control" href="#menCollection" role="button" data-slide="prev">
-                                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                                            <span class="sr-only">Previous</span>
-                                        </a>
-                                        <a class="right carousel-control" href="#menCollection" role="button" data-slide="next">
-                                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                                            <span class="sr-only">Next</span>
-                                        </a>
-                                    </div>
-                                    <!-- /.carousel -->
-                                    <li class="divider"></li>
-                                    <li><a href="#">View all Collection <span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
-                                </ul>
-                            </li>
-                            <li class="col-sm-3">
-                                <ul>
-                                    <li class="dropdown-header">Features</li>
-                                    <li><a href="#">Auto Carousel</a></li>
-                                    <li><a href="#">Carousel Control</a></li>
-                                    <li><a href="#">Left & Right Navigation</a></li>
-                                    <li><a href="#">Four Columns Grid</a></li>
-                                    <li class="divider"></li>
-                                    <li class="dropdown-header">Fonts</li>
-                                    <li><a href="#">Glyphicon</a></li>
-                                    <li><a href="#">Google Fonts</a></li>
-                                </ul>
-                            </li>
-                            <li class="col-sm-3">
-                                <ul>
-                                    <li class="dropdown-header">Plus</li>
-                                    <li><a href="#">Navbar Inverse</a></li>
-                                    <li><a href="#">Pull Right Elements</a></li>
-                                    <li><a href="#">Coloured Headers</a></li>
-                                    <li><a href="#">Primary Buttons & Default</a></li>
-                                </ul>
-                            </li>
-                            <li class="col-sm-3">
-                                <ul>
-                                    <li class="dropdown-header">Much more</li>
-                                    <li><a href="#">Easy to Customize</a></li>
-                                    <li><a href="#">Calls to action</a></li>
-                                    <li><a href="#">Custom Fonts</a></li>
-                                    <li><a href="#">Slide down on Hover</a></li>
-                                </ul>
-                            </li>
-                        </ul>
+            <!--
+
+        Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
+        Tip 2: you can also add an image using data-image tag
+
+    -->
+
+            <div class="sidebar-wrapper">
+                <div class="logo">
+                    <a href="http://www.creative-tim.com" class="simple-text">
+                    Creative Tim
+                </a>
+                </div>
+
+                <ul class="nav">
+                    <li class="active">
+                        <a href="/dashboard">
+                            <i class="pe-7s-graph"></i>
+                            <p>Dashboard</p>
+                        </a>
                     </li>
-                    <li class="dropdown mega-dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Women <span class="caret"></span></a>
-                        <ul class="dropdown-menu mega-dropdown-menu">
-                            <li class="col-sm-3">
-                                <ul>
-                                    <li class="dropdown-header">Features</li>
-                                    <li><a href="#">Auto Carousel</a></li>
-                                    <li><a href="#">Carousel Control</a></li>
-                                    <li><a href="#">Left & Right Navigation</a></li>
-                                    <li><a href="#">Four Columns Grid</a></li>
-                                    <li class="divider"></li>
-                                    <li class="dropdown-header">Fonts</li>
-                                    <li><a href="#">Glyphicon</a></li>
-                                    <li><a href="#">Google Fonts</a></li>
-                                </ul>
-                            </li>
-                            <li class="col-sm-3">
-                                <ul>
-                                    <li class="dropdown-header">Plus</li>
-                                    <li><a href="#">Navbar Inverse</a></li>
-                                    <li><a href="#">Pull Right Elements</a></li>
-                                    <li><a href="#">Coloured Headers</a></li>
-                                    <li><a href="#">Primary Buttons & Default</a></li>
-                                </ul>
-                            </li>
-                            <li class="col-sm-3">
-                                <ul>
-                                    <li class="dropdown-header">Much more</li>
-                                    <li><a href="#">Easy to Customize</a></li>
-                                    <li><a href="#">Calls to action</a></li>
-                                    <li><a href="#">Custom Fonts</a></li>
-                                    <li><a href="#">Slide down on Hover</a></li>
-                                </ul>
-                            </li>
-                            <li class="col-sm-3">
-                                <ul>
-                                    <li class="dropdown-header">Women Collection</li>
-                                    <div id="womenCollection" class="carousel slide" data-ride="carousel">
-                                        <div class="carousel-inner">
-                                            <div class="item active">
-                                                <a href="#"><img src="http://placehold.it/254x150/3498db/f5f5f5/&text=New+Collection" class="img-responsive" alt="product 1"></a>
-                                                <h4><small>Summer dress floral prints</small></h4>
-                                                <button class="btn btn-primary" type="button">49,99 €</button> <button href="#" class="btn btn-default" type="button"><span class="glyphicon glyphicon-heart"></span> Add to Wishlist</button>
-                                            </div>
-                                            <!-- End Item -->
-                                            <div class="item">
-                                                <a href="#"><img src="http://placehold.it/254x150/ff3546/f5f5f5/&text=New+Collection" class="img-responsive" alt="product 2"></a>
-                                                <h4><small>Gold sandals with shiny touch</small></h4>
-                                                <button class="btn btn-primary" type="button">9,99 €</button> <button href="#" class="btn btn-default" type="button"><span class="glyphicon glyphicon-heart"></span> Add to Wishlist</button>
-                                            </div>
-                                            <!-- End Item -->
-                                            <div class="item">
-                                                <a href="#"><img src="http://placehold.it/254x150/2ecc71/f5f5f5/&text=New+Collection" class="img-responsive" alt="product 3"></a>
-                                                <h4><small>Denin jacket stamped</small></h4>
-                                                <button class="btn btn-primary" type="button">49,99 €</button> <button href="#" class="btn btn-default" type="button"><span class="glyphicon glyphicon-heart"></span> Add to Wishlist</button>
-                                            </div>
-                                            <!-- End Item -->
-                                        </div>
-                                        <!-- End Carousel Inner -->
-                                        <!-- Controls -->
-                                        <a class="left carousel-control" href="#womenCollection" role="button" data-slide="prev">
-                                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                                            <span class="sr-only">Previous</span>
-                                        </a>
-                                        <a class="right carousel-control" href="#womenCollection" role="button" data-slide="next">
-                                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                                            <span class="sr-only">Next</span>
-                                        </a>
-                                    </div>
-                                    <!-- /.carousel -->
-                                    <li class="divider"></li>
-                                    <li><a href="#">View all Collection <span class="glyphicon glyphicon-chevron-right pull-right"></span></a></li>
-                                </ul>
-                            </li>
-                        </ul>
+                    <li>
+                        <a href="/dashboard/user">
+                            <i class="pe-7s-user"></i>
+                            <p>User Profile</p>
+                        </a>
                     </li>
-                    <li><a href="#">Store locator</a></li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right" ng-controller="MainCtrl">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">My account <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">Action</a></li>
-                            <li><a href="#">Another action</a></li>
-                            <li><a href="#">Something else here</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#">Separated link</a></li>
-                        </ul>
+                    <li>
+                        <a href="/dashboard/orders">
+                            <i class="pe-7s-note2"></i>
+                            <p>Orderst</p>
+                        </a>
                     </li>
-                    <li><a href="" ng-click="logout()">logout</a></li>
+                    <li>
+                        <a href="typography.html">
+                            <i class="pe-7s-news-paper"></i>
+                            <p>Typography</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="icons.html">
+                            <i class="pe-7s-science"></i>
+                            <p>Icons</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="maps.html">
+                            <i class="pe-7s-map-marker"></i>
+                            <p>Maps</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="notifications.html">
+                            <i class="pe-7s-bell"></i>
+                            <p>Notifications</p>
+                        </a>
+                    </li>
+                    <li class="active-pro">
+                        <a href="upgrade.html">
+                            <i class="pe-7s-rocket"></i>
+                            <p>Upgrade to PRO</p>
+                        </a>
+                    </li>
                 </ul>
             </div>
-            <!-- /.nav-collapse -->
-        </nav>
-        <div class="row">
-            <div class="col-sm-6 col-md-4 col-lg-3 mt-4" ng-controller="MainCtrl">
-                <div class="card card-inverse card-info">
-                    <img class="card-img-top" src="./images/{{settings.image}}">
-                    <div class="card-block">
-                        <figure class="profile">
-                            <img src="http://success-at-work.com/wp-content/uploads/2015/04/free-stock-photos.gif" class="profile-avatar" alt="">
-                        </figure>
-                        <h4 class="card-title mt-3">{{settings.username}}</h4>
-                        <div class="meta card-text">
-                            <a>Friends</a>
+        </div>
+
+        <div class="main-panel">
+            <nav class="navbar navbar-default navbar-fixed">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navigation-example-2">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                        <a class="navbar-brand" href="#">Dashboard</a>
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav navbar-left">
+                            <li>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-dashboard"></i>
+                                </a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-globe"></i>
+                                    <b class="caret"></b>
+                                    <span class="notification">5</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Notification 1</a></li>
+                                    <li><a href="#">Notification 2</a></li>
+                                    <li><a href="#">Notification 3</a></li>
+                                    <li><a href="#">Notification 4</a></li>
+                                    <li><a href="#">Another notification</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="">
+                                    <i class="fa fa-search"></i>
+                                </a>
+                            </li>
+                        </ul>
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <a href="">
+                               Account
+                            </a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    Dropdown
+                                    <b class="caret"></b>
+                              </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#">
+                                Log out
+                            </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="header">
+                                    <h4 class="title">Email Statistics</h4>
+                                    <p class="category">Last Campaign Performance</p>
+                                </div>
+                                <div class="content">
+                                    <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
+
+                                    <div class="footer">
+                                        <div class="legend">
+                                            <i class="fa fa-circle text-info"></i> Open
+                                            <i class="fa fa-circle text-danger"></i> Bounce
+                                            <i class="fa fa-circle text-warning"></i> Unsubscribe
+                                        </div>
+                                        <hr>
+                                        <div class="stats">
+                                            <i class="fa fa-clock-o"></i> Campaign sent 2 days ago
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="card-text">
-                            Thy shall not enter this profile
+
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="header">
+                                    <h4 class="title">Users Behavior</h4>
+                                    <p class="category">24 Hours performance</p>
+                                </div>
+                                <div class="content">
+                                    <div id="chartHours" class="ct-chart"></div>
+                                    <div class="footer">
+                                        <div class="legend">
+                                            <i class="fa fa-circle text-info"></i> Open
+                                            <i class="fa fa-circle text-danger"></i> Click
+                                            <i class="fa fa-circle text-warning"></i> Click Second Time
+                                        </div>
+                                        <hr>
+                                        <div class="stats">
+                                            <i class="fa fa-history"></i> Updated 3 minutes ago
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="card-footer">
-                        <!--<small>Last updated 3 mins ago</small>
-                            <button class="btn btn-info float-right btn-sm">Follow</button>-->
-                        <form ng-controller="MyCtrl2 as up" name="up.upload_form" ng-submit="up.submit()">
-                            <input type="file" ngf-select ng-model="form.file" name="file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" required/>
-                            <!--Image thumbnail: <img style="width:100px;" ng-show="!!form.file" ngf-thumbnail="form.file || '/thumb.jpg'"/>-->
-                            <i ng-show="up.upload_form.file.$error.required">*required</i><br>
-                            <i ng-show="up.upload_form.file.$error.maxSize">File too large
-                                {{up.file.size / 1000000|number:1}}MB: max 20M</i>
-                            <button class="btn btn-info float-right btn-sm" type="submit">change</button>
-                            <p>{{up.progress}}</p>
-                        </form>
+
+
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card ">
+                                <div class="header">
+                                    <h4 class="title">2014 Sales</h4>
+                                    <p class="category">All products including Taxes</p>
+                                </div>
+                                <div class="content">
+                                    <div id="chartActivity" class="ct-chart"></div>
+
+                                    <div class="footer">
+                                        <div class="legend">
+                                            <i class="fa fa-circle text-info"></i> Tesla Model S
+                                            <i class="fa fa-circle text-danger"></i> BMW 5 Series
+                                        </div>
+                                        <hr>
+                                        <div class="stats">
+                                            <i class="fa fa-check"></i> Data information certified
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="card ">
+                                <div class="header">
+                                    <h4 class="title">Tasks</h4>
+                                    <p class="category">Backend development</p>
+                                </div>
+                                <div class="content">
+                                    <div class="table-full-width">
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <label class="checkbox">
+                                                        <input type="checkbox" value="" data-toggle="checkbox">
+                                                    </label>
+                                                    </td>
+                                                    <td>Sign contract for "What are conference organizers afraid of?"</td>
+                                                    <td class="td-actions text-right">
+                                                        <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
+                                                        <i class="fa fa-edit"></i>
+                                                    </button>
+                                                        <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                                                        <i class="fa fa-times"></i>
+                                                    </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label class="checkbox">
+                                                        <input type="checkbox" value="" data-toggle="checkbox" checked="">
+                                                    </label>
+                                                    </td>
+                                                    <td>Lines From Great Russian Literature? Or E-mails From My Boss?</td>
+                                                    <td class="td-actions text-right">
+                                                        <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
+                                                        <i class="fa fa-edit"></i>
+                                                    </button>
+                                                        <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                                                        <i class="fa fa-times"></i>
+                                                    </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label class="checkbox">
+                                                        <input type="checkbox" value="" data-toggle="checkbox" checked="">
+                                                    </label>
+                                                    </td>
+                                                    <td>Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
+                                                    </td>
+                                                    <td class="td-actions text-right">
+                                                        <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
+                                                        <i class="fa fa-edit"></i>
+                                                    </button>
+                                                        <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                                                        <i class="fa fa-times"></i>
+                                                    </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label class="checkbox">
+                                                        <input type="checkbox" value="" data-toggle="checkbox">
+                                                    </label>
+                                                    </td>
+                                                    <td>Create 4 Invisible User Experiences you Never Knew About</td>
+                                                    <td class="td-actions text-right">
+                                                        <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
+                                                        <i class="fa fa-edit"></i>
+                                                    </button>
+                                                        <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                                                        <i class="fa fa-times"></i>
+                                                    </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label class="checkbox">
+                                                        <input type="checkbox" value="" data-toggle="checkbox">
+                                                    </label>
+                                                    </td>
+                                                    <td>Read "Following makes Medium better"</td>
+                                                    <td class="td-actions text-right">
+                                                        <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
+                                                        <i class="fa fa-edit"></i>
+                                                    </button>
+                                                        <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                                                        <i class="fa fa-times"></i>
+                                                    </button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label class="checkbox">
+                                                        <input type="checkbox" value="" data-toggle="checkbox">
+                                                    </label>
+                                                    </td>
+                                                    <td>Unfollow 5 enemies from twitter</td>
+                                                    <td class="td-actions text-right">
+                                                        <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-xs">
+                                                        <i class="fa fa-edit"></i>
+                                                    </button>
+                                                        <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-xs">
+                                                        <i class="fa fa-times"></i>
+                                                    </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <div class="footer">
+                                        <hr>
+                                        <div class="stats">
+                                            <i class="fa fa-history"></i> Updated 3 minutes ago
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-sm-5" ng-controller="MainCtrl">
-                <h4>Edit Details:</h4>
-                <form ng-submit="sub()">
-                    <div class="panel panel-default">
-                        <div class="panel-body form-horizontal payment-form">
-                            <div class="form-group">
-                                <label for="concept" class="col-sm-3 control-label">Name</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="concept" ng-model="form.user">
-                                </div>
-                            </div>
 
-                            <div class="form-group">
-                                <label for="concept" class="col-sm-3 control-label">Password</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="concept" ng-model="form.pass">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-sm-12 text-right">
-                                    <button type="submit" class="btn btn-default preview-add-button">
-                                    <span class="glyphicon glyphicon-plus"></span> Edit
-                                </button>
-                                    <p>{{msg}}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-            <div class="col-sm-5" ng-controller="MainCtrl">
-                <h4>Order Product:</h4>
-                <form ng-submit="order()">
-                    <div class="panel panel-default">
-                        <div class="panel-body form-horizontal payment-form">
-                            <div class="form-group">
-                                <label for="concept" class="col-sm-3 control-label">Name</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="concept" ng-model="form.name">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-sm-12 text-right">
-                                    <button type="submit" class="btn btn-default preview-add-button">
-                                    <span class="glyphicon glyphicon-plus"></span> Purchase
-                                </button>
-                                    <p>{{msg}}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-        </div>
-        <!-- row -->
-
-        <div class="row">
-            <div class="col-sm-5" ng-controller="MainCtrl">
-                <h4>Edit Details:</h4>
-                <form ng-submit="sub()">
-                    <div class="panel panel-default">
-                        <div class="panel-body form-horizontal payment-form">
-                            <div class="form-group">
-                                <label for="concept" class="col-sm-3 control-label">Name</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="concept" ng-model="form.user">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="concept" class="col-sm-3 control-label">Password</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="concept" ng-model="form.pass">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-sm-12 text-right">
-                                    <button type="submit" class="btn btn-default preview-add-button">
-                                    <span class="glyphicon glyphicon-plus"></span> Edit
-                                </button>
-                                    <p>{{msg}}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-            <div class="col-sm-5" ng-controller="MainCtrl">
-                <h4>Order Product:</h4>
-                <form ng-submit="order()">
-                    <div class="panel panel-default">
-                        <div class="panel-body form-horizontal payment-form">
-                            <div class="form-group">
-                                <label for="concept" class="col-sm-3 control-label">Name</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="concept" ng-model="form.name">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-sm-12 text-right">
-                                    <button type="submit" class="btn btn-default preview-add-button">
-                                    <span class="glyphicon glyphicon-plus"></span> Purchase
-                                </button>
-                                    <p>{{msg}}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-        </div>
-        <!-- row -->
-
-
-
-        <!--<form ng-controller="MyCtrl2 as up">
-                    <input
-                        type="file"
-                        ngf-select
-                        ng-model="form.file"
-                        ngf-pattern="'image/*'"
-                        accept="image/*"
-                        ngf-max-size="20MB"
-                        />
-                    Image thumbnail: <img style="width:100px;" ng-show="!!up.file" ngf-thumbnail="up.file || '/thumb.jpg'"/>
-                    <i ng-show="up.upload_form.file.$error.required">*required</i><br>
-                    <i ng-show="up.upload_form.file.$error.maxSize">File too large
-                    {{up.file.size / 1000000|number:1}}MB: max 20M</i>
-                    <button type="submit" ng-click="up.submit()">submit</button>
-                    <p>{{up.progress}}</p>
-                </form>-->
-
-        <div class="row">
-            <div class="panel panel-primary filterable">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Products</h3>
-                    <div class="pull-right">
-                        <!--<button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>-->
-                    </div>
+            <footer class="footer">
+                <div class="container-fluid">
+                    <nav class="pull-left">
+                        <ul>
+                            <li>
+                                <a href="#">
+                                Home
+                            </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                Company
+                            </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                Portfolio
+                            </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                               Blog
+                            </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <p class="copyright pull-right">
+                        &copy; 2016 <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
+                    </p>
                 </div>
-                <table class="table" ng-controller="MainCtrl">
-                    <thead>
-                        <tr class="filters">
-                            <th><input type="text" class="form-control" placeholder="#" disabled></th>
-                            <th><input type="text" class="form-control" placeholder="Name" disabled></th>
-                            <th><input type="text" class="form-control" placeholder="Price" disabled></th>
-                            <th><input type="text" class="form-control" placeholder="Image" disabled></th>
-                        </tr>
-                    </thead>
-                    <tbody ng-repeat="product in products">
-                        <tr>
-                            <td>{{product.product_id}}</td>
-                            <td>{{product.product_name}}</td>
-                            <td>{{product.product_price}}</td>
-                            <td><img src="./images/{{product.image}}" style="width:100px; height:100px;"></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            </footer>
+
         </div>
-
-        <div class="row">
-            <div class="panel panel-success">
-                <div class="panel-heading">
-                    <h3 class="panel-title">My Orders</h3>
-                    <div class="pull-right">
-                        <!--<span class="clickable filter" data-toggle="tooltip" title="Toggle table filter" data-container="body">
-								<i class="glyphicon glyphicon-filter"></i>
-							</span>-->
-                    </div>
-                </div>
-                <div class="panel-body">
-                    <input type="text" class="form-control" id="task-table-filter" data-action="filter" data-filters="#task-table" placeholder="Filter Orders" />
-                </div>
-                <table class="table table-hover" id="task-table" ng-controller="MainCtrl">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Price</th>
-                            <th>Image</th>
-                        </tr>
-                    </thead>
-                    <tbody ng-repeat="order in orders">
-                        <tr>
-                            <td>1</td>
-                            <td>{{order.product_id.product_name}}</td>
-                            <td>{{order.product_id.product_price}}</td>
-                            <td><img src="./images/{{order.product_id.image}}" style="width:100px; height:100px;"></td>
-                        </tr>
-
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
     </div>
-    <!-- container -->
 </body>
 <script>
-    var app = angular.module('K', ['ngFileUpload'])
-
-    app.controller('MainCtrl', [
-        '$scope', '$http',
-        function($scope, $http) {
-            $scope.test = 'Hello world!';
-            $scope.sub = function() {
-                $http.post('/cpost', $scope.form)
-                    .success(function(data) {
-                        console.log("success ", data)
-                        if (data.message == "success") {
-                            $scope.msg = "User edited"
-                        }
-                    })
-                    .error(function(data) {
-                        console.log("error ", data)
-                    });
-            }
-            $http.get('/cpost')
-                .then(function(res) {
-                    $scope.settings = res.data;
-                });
-
-            $http.get("/products")
-                .then(function(res) {
-                    $scope.products = res.data;
-                })
-
-            $http.get("/corders")
-                .then(function(res) {
-                    $scope.orders = res.data;
-                })
-
-            $scope.logout = function() {
-                $http.get("/logout")
-                    .then(function(res) {
-                        console.log(res)
-                        window.location.href = 'http://localhost:3000/#/login2';
-                    })
-            }
-
-            $scope.order = function() {
-                $http.post("/orders", $scope.form)
-                    .success(function(data) {
-                        console.log("success ", data)
-                        if (data.message == "success") {
-                            $scope.msg = "order successfull"
-                        }
-                    })
-                    .error(function(data) {
-                        console.log("error ", data)
-                    })
-            }
-
-        }
-    ])
-
-    app.controller('MyCtrl2', ['Upload', '$window', '$scope', function(Upload, $window, $scope) {
-        var vm = this;
-        vm.submit = function() { //function to call on form submit
-            if (vm.upload_form.file.$valid && vm.file) { //check if from is valid
-                vm.upload(vm.file); //call upload function
-            }
-        }
-
-        vm.submit = function(file) {
-            Upload.upload({
-                url: 'http://localhost:3000/upload',
-                method: 'POST',
-                data: $scope.form
-            }).then(function(resp) {
-                if (resp.data.error_code === 0) {
-                    $window.alert('Success ' + resp.config.data.file.name + 'uploaded. Response: ');
-                    console.log(resp.config.data.file.name)
-                } else {
-                    $window.alert('an error occured');
-                }
-            }, function(resp) {
-                console.log('Error status: ' + resp.status);
-                $window.alert('Error status: ' + resp.status);
-            }, function(evt) {
-                console.log(evt);
-                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-                vm.progress = 'progress: ' + progressPercentage + '% ';
-            });
-        };
-    }]);
 </script>
 
 </html>
-
-<style>
-    @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
-    body {
-        font-family: 'Open Sans', 'sans-serif';
-    }
-    
-    .mega-dropdown {
-        position: static !important;
-    }
-    
-    .mega-dropdown-menu {
-        padding: 20px 0px;
-        width: 100%;
-        box-shadow: none;
-        -webkit-box-shadow: none;
-    }
-    
-    .mega-dropdown-menu>li>ul {
-        padding: 0;
-        margin: 0;
-    }
-    
-    .mega-dropdown-menu>li>ul>li {
-        list-style: none;
-    }
-    
-    .mega-dropdown-menu>li>ul>li>a {
-        display: block;
-        color: #222;
-        padding: 3px 5px;
-    }
-    
-    .mega-dropdown-menu>li ul>li>a:hover,
-    .mega-dropdown-menu>li ul>li>a:focus {
-        text-decoration: none;
-    }
-    
-    .mega-dropdown-menu .dropdown-header {
-        font-size: 18px;
-        color: #ff3546;
-        padding: 5px 60px 5px 5px;
-        line-height: 30px;
-    }
-    
-    .carousel-control {
-        width: 30px;
-        height: 30px;
-        top: -35px;
-    }
-    
-    .left.carousel-control {
-        right: 30px;
-        left: inherit;
-    }
-    
-    .carousel-control .glyphicon-chevron-left,
-    .carousel-control .glyphicon-chevron-right {
-        font-size: 12px;
-        background-color: #fff;
-        line-height: 30px;
-        text-shadow: none;
-        color: #333;
-        border: 1px solid #ddd;
-    }
-</style>
-
-<script>
-    $(document).ready(function() {
-        $(".dropdown").hover(
-            function() {
-                $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true, true).slideDown("400");
-                $(this).toggleClass('open');
-            },
-            function() {
-                $('.dropdown-menu', this).not('.in .dropdown-menu').stop(true, true).slideUp("400");
-                $(this).toggleClass('open');
-            }
-        );
-    });
-</script>

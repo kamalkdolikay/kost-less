@@ -11,9 +11,17 @@ mongoose.model('User', UserSchema, 'User')*/
 
 var UserSchema = new Schema({
     username: { type: String, unique: true },
+    firstname: String,
+    lastname: String,
     password: String,
     image: String,
-    type: String
+    type: String,
+    email: String,
+    address: String,
+    city: String,
+    country: String,
+    postalcode: String,
+    aboutme: String
 });
 
 mongoose.model('User', UserSchema, 'User');

@@ -7,7 +7,8 @@ var ProductSchema = new Schema({
     product_name: String,
     product_price: Number,
     product_category: String,
-    image: String
+    image: String,
+    date: String
 });
 
 mongoose.model('Product', ProductSchema, 'Product');

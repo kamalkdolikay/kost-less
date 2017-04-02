@@ -36,7 +36,7 @@ app.config([
             controller: 'loginCtrl'
         });
 
-        $urlRouterProvider.otherwise('home');
+        //$urlRouterProvider.otherwise('home');
 
         //$locationProvider.html5Mode(true);
     }

@@ -1,387 +1,640 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title></title>
+    <!-- -->
     <base href="/">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <!-- -->
+
+    <!-- -->
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.10/angular.min.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/danialfarid-angular-file-upload/12.2.13/ng-file-upload-shim.min.js"></script>
-    <!--<script src="/javascripts/angularApp.js"></script>-->
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <!-- -->
+
+    <!-- -->
+    <script src="/javascripts/admin.js"></script>
+    <link rel='stylesheet' href='/stylesheets/admin-style.css' />
+    <!-- -->
 </head>
 
 <body ng-app="KD">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12">
-                <legend>Hello Mr. KD</legend>
+    <div id="top-nav" class="navbar navbar-inverse navbar-static-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+                <a class="navbar-brand" href="#">Dashboard</a>
             </div>
-            <div class="col-sm-5">
-                <h4>Add User:</h4>
-                <form ng-controller="main" ng-submit="addusr()">
-                    <div class="panel panel-default">
-                        <div class="panel-body form-horizontal payment-form">
-                            <div class="form-group">
-                                <label for="concept" class="col-sm-3 control-label">Name</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="concept" ng-model="form.user">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="description" class="col-sm-3 control-label">Type</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="description" ng-model="form.type">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="amount" class="col-sm-3 control-label">Password</label>
-                                <div class="col-sm-9">
-                                    <input type="password" class="form-control" id="amount" ng-model="form.pass">
-                                </div>
-                            </div>
-                            <!--<div class="form-group">
-                            <label for="status" class="col-sm-3 control-label">Status</label>
-                            <div class="col-sm-9">
-                                <select class="form-control" id="status" name="status">
-                                    <option>Paid</option>
-                                    <option>Unpaid</option>
-                                </select>
-                            </div>
-                        </div> -->
-                            <div class="form-group">
-                                <div class="col-sm-12 text-right">
-                                    <button type="submit" class="btn btn-default preview-add-button">
-                                    <span class="glyphicon glyphicon-plus"></span> Add
-                                </button>
-                                    <p>{{msg}}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" role="button" data-toggle="dropdown" href="#"><i class="glyphicon glyphicon-user"></i> Admin <span class="caret"></span></a>
+                        <ul id="g-account-menu" class="dropdown-menu" role="menu">
+                            <li><a href="#">My Profile</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><span class="glyphicon glyphicon-heart"></span> Logout</a></li>
 
-            <div class="col-sm-5">
-                <h4>Delete User:</h4>
-                <form ng-controller="main" ng-submit="delusr()">
-                    <div class="panel panel-default">
-                        <div class="panel-body form-horizontal payment-form">
-                            <div class="form-group">
-                                <label for="concept" class="col-sm-3 control-label">Name</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="concept" ng-model="form.name">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-sm-12 text-right">
-                                    <button type="submit" class="btn btn-default preview-add-button">
-                                    <span class="glyphicon glyphicon-plus"></span> Delete
-                                </button>
-                                    <p>{{msg}}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
+                </ul>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col-sm-5">
-                <h4>Add Product:</h4>
-                <form ng-controller="MyCtrl2 as up">
-                    <div class="panel panel-default">
-                        <div class="panel-body form-horizontal payment-form">
-                            <div class="form-group">
-                                <label for="concept" class="col-sm-3 control-label">ID</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="concept" ng-model="form.id">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="concept" class="col-sm-3 control-label">Name</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="concept" ng-model="form.name">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="concept" class="col-sm-3 control-label">Price</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="concept" ng-model="form.price">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="status" class="col-sm-3 control-label">Category</label>
-                                <div class="col-sm-9">
-                                    <select class="form-control" id="status" ng-model="form.category">
-                                <option>Animal</option>
-                                <option>Automobile</option>
-                            </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="concept" class="col-sm-3 control-label">Image</label>
-                                <div class="col-sm-9">
-                                    <input type="file" ngf-select ng-model="form.file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" class="form-control" id="concept" />
-                                    <i ng-show="up.upload_form.file.$error.required">*required</i><br>
-                                    <i ng-show="up.upload_form.file.$error.maxSize">File too large 
-                                {{up.file.size / 1000000|number:1}}MB: max 20M</i>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-sm-12 text-right">
-                                    <button type="submit" ng-click="up.submit()" class="btn btn-default preview-add-button">
-                                    <span class="glyphicon glyphicon-plus"></span> Add
-                                </button>
-                                    <p>{{up.progress}}{{msg}}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-            <div class="col-sm-5">
-                <h4>Delete Product:</h4>
-                <form ng-controller="main" ng-submit="delpro()">
-                    <div class="panel panel-default">
-                        <div class="panel-body form-horizontal payment-form">
-                            <div class="form-group">
-                                <label for="concept" class="col-sm-3 control-label">ID</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="concept" ng-model="form.id">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="concept" class="col-sm-3 control-label">Name</label>
-                                <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="concept" ng-model="form.name">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <div class="col-sm-12 text-right">
-                                    <button type="submit" class="btn btn-default preview-add-button">
-                                    <span class="glyphicon glyphicon-plus"></span> Delete
-                                </button>
-                                    <p>{{msg}}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <div class="row" ng-controller="main">
-            <div class="col-sm-5">
-                <h4>Show Users:</h4>
-                <div class="panel panel-default">
-                    <div class="panel-body form-horizontal payment-form">
-                        <div class="form-group" ng-repeat="user in users">
-                            <label for="concept" class="col-sm-3 control-label">{{user.username}}</label>
-                            <div class="col-sm-9">
-                                <img src="./images/{{user.image}}" style="width:100px; height:100px;">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-sm-5" ng-controller="main">
-                <h4>Show Products:</h4>
-                <div class="panel panel-default" ng-controller="main">
-                    <div class="panel-body form-horizontal payment-form">
-                        <div class="form-group" ng-repeat="product in products">
-                            <label for="concept" class="col-sm-3 control-label">{{product.product_name}}</label>
-                            <div class="col-sm-9">
-                                <img src="./images/{{product.image}}" style="width:100px; height:100px;">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+        <!-- /container -->
     </div>
-    <!-- container -->
+    <!-- /Header -->
 
-    <!--delete user
-    <form ng-controller="main" ng-submit="delusr()">
-        <input type="text" ng-model="form.name">
-        <input type="submit">
-        {{msg}}
-    </form>
+    <!-- Main -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3">
+                <!-- Left column -->
+                <a href="#"><strong><i class="glyphicon glyphicon-wrench"></i> Tools</strong></a>
 
-    add user
-    <form ng-controller="main" ng-submit="addusr()">
-        <input type="text" ng-model="form.user" placeholder="name">
-        <input type="text" ng-model="form.type" placeholder="type">
-        <input type="text" ng-model="form.pass" placeholder="password">
-        <input type="submit">
-        {{msg}}
-    </form>
+                <hr>
 
-    add product
-    <form ng-controller="main" ng-submit="addpro()">
-        <input type="text" ng-model="form.id" placeholder="id">
-        <input type="text" ng-model="form.name" placeholder="name">
-        <input type="text" ng-model="form.price" placeholder="price">
-        <input type="submit">
-        {{msg}}
-    </form>
+                <ul class="nav nav-stacked">
+                    <li class="nav-header"> <a href="#" data-toggle="collapse" data-target="#userMenu">Settings <i class="glyphicon glyphicon-chevron-down"></i></a>
+                        <ul class="nav nav-stacked collapse in" id="userMenu">
+                            <li class="active"> <a href="#"><i class="glyphicon glyphicon-home"></i> Home</a></li>
+                            <li><a href=""><i class="glyphicon glyphicon-envelope"></i> Messages <span class="badge badge-info">4</span></a></li>
+                            <li><a href=""><i class="glyphicon glyphicon-cog"></i> Options</a></li>
+                            <li><a href=""><i class="glyphicon glyphicon-comment"></i> Shoutbox</a></li>
+                            <li><a href=""><i class="glyphicon glyphicon-user"></i> Staff List</a></li>
+                            <li><a href=""><i class="glyphicon glyphicon-flag"></i> Transactions</a></li>
+                            <li><a href=""><i class="glyphicon glyphicon-exclamation-sign"></i> Rules</a></li>
+                            <li><a href=""><i class="glyphicon glyphicon-off"></i> Logout</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-header"> <a href="#" data-toggle="collapse" data-target="#menu2"> Reports <i class="glyphicon glyphicon-chevron-right"></i></a>
 
-    delete product
-    <form ng-controller="main" ng-submit="delpro()">
-        <input type="text" ng-model="form.id" placeholder="id">
-        <input type="text" ng-model="form.name" placeholder="name">
-        <input type="submit">
-        {{msg}}
-    </form>
+                        <ul class="nav nav-stacked collapse" id="menu2">
+                            <li><a href="">Information &amp; Stats</a>
+                            </li>
+                            <li><a href="">Views</a>
+                            </li>
+                            <li><a href="">Requests</a>
+                            </li>
+                            <li><a href="">Timetable</a>
+                            </li>
+                            <li><a href="">Alerts</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-header">
+                        <a href="#" data-toggle="collapse" data-target="#menu3"> Social Media <i class="glyphicon glyphicon-chevron-right"></i></a>
+                        <ul class="nav nav-stacked collapse" id="menu3">
+                            <li><a href=""><i class="glyphicon glyphicon-circle"></i> Facebook</a></li>
+                            <li><a href=""><i class="glyphicon glyphicon-circle"></i> Twitter</a></li>
+                        </ul>
+                    </li>
+                </ul>
 
-    add product with image
-    <form ng-controller="MyCtrl2 as up" name="up.upload_form">
-        <input type="text" ng-model="up.id" placeholder="id">
-        <input type="text" ng-model="up.name" placeholder="name">
-        <input type="text" ng-model="up.price" placeholder="price">
-          <input 
-              type="file" ngf-select ng-model="up.file" 
-              name="file" 
-              ngf-pattern="'image/*'"
-              accept="image/*" 
-              ngf-max-size="20MB" 
-              />
-          Image thumbnail: <img style="width:100px;" ng-show="!!up.file" ngf-thumbnail="up.file || '/thumb.jpg'"/>
-          <i ng-show="up.upload_form.file.$error.required">*required</i><br>
-          <i ng-show="up.upload_form.file.$error.maxSize">File too large 
-          {{up.file.size / 1000000|number:1}}MB: max 20M</i>
-          <button type="submit" ng-click="up.submit()">submit</button>
-          <p>{{up.progress}}{{msg}}</p>
-      </form>-->
+                <!--<hr>
+
+            <a href="#"><strong><i class="glyphicon glyphicon-link"></i> Resources</strong></a>
+
+            <hr>
+
+            <ul class="nav nav-pills nav-stacked">
+                <li class="nav-header"></li>
+                <li><a href="#"><i class="glyphicon glyphicon-list"></i> Layouts &amp; Templates</a></li>
+                <li><a href="#"><i class="glyphicon glyphicon-briefcase"></i> Toolbox</a></li>
+                <li><a href="#"><i class="glyphicon glyphicon-link"></i> Widgets</a></li>
+                <li><a href="#"><i class="glyphicon glyphicon-list-alt"></i> Reports</a></li>
+                <li><a href="#"><i class="glyphicon glyphicon-book"></i> Pages</a></li>
+                <li><a href="#"><i class="glyphicon glyphicon-star"></i> Social Media</a></li>
+            </ul>
+
+            <hr>
+            <ul class="nav nav-stacked">
+                <li class="active"><a href="http://bootply.com" title="The Bootstrap Playground" target="ext">Playground</a></li>
+                <li><a href="/tagged/bootstrap-3">Bootstrap 3</a></li>
+                <li><a href="/61518" title="Bootstrap 3 Panel">Panels</a></li>
+                <li><a href="/61521" title="Bootstrap 3 Icons">Glyphicons</a></li>
+                <li><a href="/62603">Layout</a></li>
+            </ul>
+
+            <hr>
+
+            <a href="#"><strong><i class="glyphicon glyphicon-list"></i> More Templates</strong></a>
+
+            <hr>
+
+            <ul class="nav nav-stacked">
+                <li class="active"><a rel="nofollow" href="http://goo.gl/pQoXEh" target="ext">Premium Themes</a></li>
+                <li><a rel="nofollow" href="https://wrapbootstrap.com/?ref=bootply">Wrap Bootstrap</a></li>
+                <li><a rel="nofollow" href="http://bootstrapzero.com">BootstrapZero</a></li>
+            </ul>-->
+            </div>
+            <!-- /col-3 -->
+            <div class="col-sm-9">
+
+                <!-- column 2 -->
+                <ul class="list-inline pull-right">
+                    <li><a href="#"><i class="glyphicon glyphicon-cog"></i></a></li>
+                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-comment"></i><span class="count">3</span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="">1. Is there a way..</a></li>
+                            <li><a href="">2. Hello, admin. I would..</a></li>
+                            <li><a href=""><strong>All messages</strong></a></li>
+                        </ul>
+                    </li>
+                    <li><a href=""><i class="glyphicon glyphicon-user"></i></a></li>
+                    <li><a title="Add Widget" data-toggle="modal" href="#addWidgetModal"><span class="glyphicon glyphicon-plus-sign"></span> Add Widget</a></li>
+                </ul>
+                <a href=""><strong><i class="glyphicon glyphicon-dashboard"></i> My Dashboard</strong></a>
+                <hr>
+
+                <div class="row">
+                    <!-- center left-->
+                    <div class="col-md-6">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="panel-title">
+                                    <i class="glyphicon glyphicon-wrench pull-right"></i>
+                                    <h4>Add User</h4>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <form class="form form-vertical" ng-controller="main" ng-submit="addusr()">
+                                    <div class="control-group">
+                                        <label>Name</label>
+                                        <div class="controls">
+                                            <input type="text" class="form-control" placeholder="name" ng-model="form.user" required>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label>Email</label>
+                                        <div class="controls">
+                                            <input type="email" class="form-control" placeholder="email" ng-model="form.email" required>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label>Password</label>
+                                        <div class="controls">
+                                            <input type="password" class="form-control" placeholder="*****" ng-model="form.pass" required>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label></label>
+                                        <div class="controls">
+                                            <button type="submit" class="btn btn-primary">
+                                            Add
+                                        </button> {{msg}}
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!--/panel content-->
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="panel-title">
+                                    <i class="glyphicon glyphicon-wrench pull-right"></i>
+                                    <h4>Delete User</h4>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <form class="form form-vertical" ng-controller="main" ng-submit="delusr()">
+                                    <div class="control-group">
+                                        <label>Name</label>
+                                        <div class="controls">
+                                            <input type="text" class="form-control" placeholder="name" ng-model="form.name" required>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label></label>
+                                        <div class="controls">
+                                            <button type="submit" class="btn btn-primary">
+                                            Delete
+                                        </button> {{msg}}
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!--/panel content-->
+                        </div>
+
+                        <!--/panel-->
+                        <!--<div class="well">Inbox Messages <span class="badge pull-right">3</span></div>
+
+                        <hr>
+
+                        <div class="btn-group btn-group-justified">
+                            <a href="#" class="btn btn-primary col-sm-3">
+                                <i class="glyphicon glyphicon-plus"></i>
+                                <br> Service
+                            </a>
+                            <a href="#" class="btn btn-primary col-sm-3">
+                                <i class="glyphicon glyphicon-cloud"></i>
+                                <br> Cloud
+                            </a>
+                            <a href="#" class="btn btn-primary col-sm-3">
+                                <i class="glyphicon glyphicon-cog"></i>
+                                <br> Tools
+                            </a>
+                            <a href="#" class="btn btn-primary col-sm-3">
+                                <i class="glyphicon glyphicon-question-sign"></i>
+                                <br> Help
+                            </a>
+                        </div>-->
+
+                        <!--<hr>-->
+
+                        <!--<div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4>Reports</h4>
+                            </div>
+                            <div class="panel-body">
+
+                                <small>Success</small>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100" style="width: 72%">
+                                        <span class="sr-only">72% Complete</span>
+                                    </div>
+                                </div>
+                                <small>Info</small>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                                        <span class="sr-only">20% Complete</span>
+                                    </div>
+                                </div>
+                                <small>Warning</small>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                        <span class="sr-only">60% Complete (warning)</span>
+                                    </div>
+                                </div>
+                                <small>Danger</small>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                        <span class="sr-only">80% Complete</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/panel-body
+                        </div>-->
+                        <!--/panel-->
+
+                        <hr>
+
+                        <!--tabs-->
+                        <!--<div class="panel">
+                            <ul class="nav nav-tabs" id="myTab">
+                                <li class="active"><a href="#profile" data-toggle="tab">Profile</a></li>
+                                <li><a href="#messages" data-toggle="tab">Messages</a></li>
+                                <li><a href="#settings" data-toggle="tab">Settings</a></li>
+                            </ul>
+                            <div class="tab-content">
+                                <div class="tab-pane active well" id="profile">
+                                    <h4><i class="glyphicon glyphicon-user"></i></h4> Lorem profile dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate.
+                                    <p>Quisque mauris augue, molestie tincidunt condimentum vitae, gravida a libero. Aenean sit amet felis dolor, in sagittis nisi.</p>
+                                </div>
+                                <div class="tab-pane well" id="messages">
+                                    <h4><i class="glyphicon glyphicon-comment"></i></h4> Message ipsum dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate.
+                                    <p>Quisque mauris augu.</p>
+                                </div>
+                                <div class="tab-pane well" id="settings">
+                                    <h4><i class="glyphicon glyphicon-cog"></i></h4> Lorem settings dolor sit amet, consectetur adipiscing elit. Duis pharetra varius quam sit amet vulputate.
+                                    <p>Quisque mauris augue, molestie.</p>
+                                </div>
+                            </div>
+
+                        </div>-->
+                        <!--/tabs-->
+
+                        <!--<hr>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4>New Requests</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="list-group">
+                                    <a href="#" class="list-group-item active">Hosting virtual mailbox serv..</a>
+                                    <a href="#" class="list-group-item">Dedicated server doesn't..</a>
+                                    <a href="#" class="list-group-item">RHEL 6 install on new..</a>
+                                </div>
+                            </div>
+                        </div>-->
+                    </div>
+                    <!--/col-->
+                    <div class="col-md-6">
+                        <!--<div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4>Notices</h4>
+                            </div>
+                            <div class="panel-body">
+                                <div class="alert alert-info">
+                                    <button type="button" class="close" data-dismiss="alert">×</button> This is a dismissable alert.. just sayin'.
+                                </div>
+                                <p>This is a dashboard-style layout that uses Bootstrap 3. You can use this template as a starting point to create something more unique.</p>
+                                <p>Visit the Bootstrap Playground at <a href="http://bootply.com">Bootply</a> to tweak this layout or discover more useful code snippets.</p>
+                            </div>
+                        </div>-->
+                        <!--<div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Visits</th>
+                                        <th>ROI</th>
+                                        <th>Source</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>45</td>
+                                        <td>2.45%</td>
+                                        <td>Direct</td>
+                                    </tr>
+                                    <tr>
+                                        <td>289</td>
+                                        <td>56.2%</td>
+                                        <td>Referral</td>
+                                    </tr>
+                                    <tr>
+                                        <td>98</td>
+                                        <td>25%</td>
+                                        <td>Type</td>
+                                    </tr>
+                                    <tr>
+                                        <td>..</td>
+                                        <td>..</td>
+                                        <td>..</td>
+                                    </tr>
+                                    <tr>
+                                        <td>..</td>
+                                        <td>..</td>
+                                        <td>..</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>-->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="panel-title">
+                                    <i class="glyphicon glyphicon-wrench pull-right"></i>
+                                    <h4>Add Product</h4>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <form class="form form-vertical" ng-controller="MyCtrl2 as up" ng-submit="up.submit()">
+                                    <div class="control-group">
+                                        <label>ID</label>
+                                        <div class="controls">
+                                            <input type="number" class="form-control" placeholder="id" ng-model="form.id" required>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label>Name</label>
+                                        <div class="controls">
+                                            <input type="text" class="form-control" placeholder="Enter Name" ng-model="form.name" required>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label>Price</label>
+                                        <div class="controls">
+                                            <input type="number" class="form-control" placeholder="price" ng-model="form.price" required>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label>Category</label>
+                                        <div class="controls">
+                                            <select class="form-control" ng-model="form.category" required>
+                                            <option>options</option>
+                                            <option>options</option>
+                                            <option>options</option>
+                                            <option>options</option>
+                                            <option>options</option>
+                                            <option>options</option>
+                                        </select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label>Image</label>
+                                        <div class="controls">
+                                            <input type="file" ngf-select ng-model="form.file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" class="form-control" id="concept" required />
+                                            <i ng-show="up.upload_form.file.$error.required">*required</i><br>
+                                            <i ng-show="up.upload_form.file.$error.maxSize">File too large 
+                                            {{up.file.size / 1000000|number:1}}MB: max 20M</i>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label></label>
+                                        <div class="controls">
+                                            <button type="submit" class="btn btn-primary">
+                                            Add
+                                        </button> {{up.progress}}{{msg}}
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!--/panel content-->
+                        </div>
+                        <!--/panel-->
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="panel-title">
+                                    <i class="glyphicon glyphicon-wrench pull-right"></i>
+                                    <h4>Delete Product</h4>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <form class="form form-vertical" ng-controller="main" ng-submit="delpro()">
+                                    <div class="control-group">
+                                        <label>ID</label>
+                                        <div class="controls">
+                                            <input type="number" class="form-control" placeholder="id" ng-model="form.id" required>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label>Name</label>
+                                        <div class="controls">
+                                            <input type="text" class="form-control" placeholder="name" ng-model="form.name" required>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label></label>
+                                        <div class="controls">
+                                            <button type="submit" class="btn btn-primary">
+                                            Delete
+                                        </button> {{msg}}
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <!--/panel content-->
+                        </div>
+
+                        <!--<div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="panel-title">
+                                    <h4>Engagement</h4>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="col-xs-4 text-center"><img src="http://placehold.it/80/BBBBBB/FFF" class="img-circle img-responsive"></div>
+                                <div class="col-xs-4 text-center"><img src="http://placehold.it/80/EFEFEF/555" class="img-circle img-responsive"></div>
+                                <div class="col-xs-4 text-center"><img src="http://placehold.it/80/EEEEEE/222" class="img-circle img-responsive"></div>
+                            </div>
+                        </div>-->
+                        <!--/panel-->
+
+                    </div>
+                    <!--/col-span-6-->
+
+                </div>
+                <!--/row-->
+
+                <hr>
+
+                <!--<a href="#"><strong><i class="glyphicon glyphicon-comment"></i> Discussions</strong></a>
+
+                <hr>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="list-group">
+                            <li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-flash"></i> <small>(3 mins ago)</small> The 3rd page reports don't contain any links. Does anyone know why..</a></li>
+                            <li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-flash"></i> <small>(1 hour ago)</small> Hi all, I've just post a report that show the relationship betwe..</a></li>
+                            <li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-heart"></i> <small>(2 hrs ago)</small> Paul. That document you posted yesterday doesn't seem to contain the over..</a></li>
+                            <li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-heart-empty"></i> <small>(4 hrs ago)</small> The map service on c243 is down today. I will be fixing the..</a></li>
+                            <li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-heart"></i> <small>(yesterday)</small> I posted a new document that shows how to install the services layer..</a></li>
+                            <li class="list-group-item"><a href="#"><i class="glyphicon glyphicon-flash"></i> <small>(yesterday)</small> ..</a></li>
+                        </ul>
+                    </div>
+                </div>-->
+
+                <div class="row" ng-controller="PageCtrl">
+                    <div class="col-md-12">
+                        <div class="panel panel-primary filterable">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Products</h3>
+                                <div class="panel-body">
+                                    <input type="text" class="form-control" id="task-table-filter" ng-model="search.product_name" data-action="filter" data-filters="#task-table" placeholder="Filter Products" />
+                                </div>
+                            </div>
+
+                            <div>
+                                <table class="table">
+                                    <thead>
+                                        <tr class="filters">
+                                            <th><input type="text" class="form-control" placeholder="#" disabled></th>
+                                            <th><input type="text" class="form-control" placeholder="Name" disabled></th>
+                                            <th><input type="text" class="form-control" placeholder="Price" disabled></th>
+                                            <th><input type="text" class="form-control" placeholder="Image" disabled></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody ng-repeat="item in filtered = items | filter:search | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
+                                        <tr>
+                                            <td>{{item.product_id}}</td>
+                                            <td>{{item.product_name}}</td>
+                                            <td>{{item.product_price}}</td>
+                                            <td><img src="./images/{{item.image}}" style="width:100px; height:100px;"></td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
+
+                        </div>
+                        View <select ng-model="viewby" ng-change="setItemsPerPage(viewby)"><option>3</option><option>5</option><option>10</option><option>20</option><option>30</option><option>40</option><option>50</option></select> records at a time.
+                        <ul uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" items-per-page="entryLimit"></ul>
+                        <pre>Page: {{currentPage}} / {{numPages}}</pre>
+                        <hr />
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">My Orders</h3>
+                                <div class="pull-right">
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <input type="text" class="form-control" id="task-table-filter" data-action="filter" data-filters="#task-table" placeholder="Filter Orders" />
+                            </div>
+                            <table class="table table-hover" id="task-table" ng-controller="main">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Price</th>
+                                        <th>Image</th>
+                                    </tr>
+                                </thead>
+                                <tbody ng-repeat="user in users">
+                                    <tr>
+                                        <td>1</td>
+                                        <td>{{user.username}}</td>
+                                        <td>{{user.type}}</td>
+                                        <td><img src="./images/{{user.image}}" style="width:100px; height:100px;"></td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!--/col-span-9-->
+        </div>
+    </div>
+    <!-- /Main -->
+
+    <footer class="text-center">All Rights Reserved. <a href="http://www.instagram.com/kamaldolikay"><strong>Kamal Dolikay</strong></a></footer>
+
+    <div class="modal" id="addWidgetModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">Add Widget</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Add a widget stuff here..</p>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" data-dismiss="modal" class="btn">Close</a>
+                    <a href="#" class="btn btn-primary">Save changes</a>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dalog -->
+    </div>
+    <!-- /.modal -->
 
 </body>
 
 <script>
-    var app = angular.module("KD", ['ngFileUpload'])
+    $(document).ready(function() {
+        $(".alert").addClass("in").fadeOut(4500);
 
-    app.controller("main", function($scope, $http) {
-        $scope.delusr = function() {
-            $http.post("/delete", $scope.form)
-                .success(function(data) {
-                    console.log("success", data)
-                    if (data.message == "success") {
-                        $scope.msg = "user deleted"
-                    }
-                    if (data.message == "error") {
-                        $scope.msg = "enter a valid user"
-                    }
-                })
-                .error(function(data) {
-                    console.log("error ", data)
-                })
-        }
-
-        $scope.addusr = function() {
-            $http.post("/register", $scope.form)
-                .success(function(data) {
-                    console.log("success ", data)
-                    if (data.message == "user registered") {
-                        $scope.msg = "user registered"
-                    }
-                    if (data.message == 11000) {
-                        $scope.msg = "User already registered"
-                    }
-                })
-                .error(function(data) {
-                    console.log("error ", data)
-                })
-        }
-
-        $scope.addpro = function() {
-            $http.post("/addproduct", $scope.form)
-                .success(function(data) {
-                    console.log("success", data)
-                    if (data.message == "success") {
-                        $scope.msg = "new product added"
-                    }
-                    if (data.message == "error") {
-                        $scope.msg = "try again"
-                    }
-                })
-                .error(function(data) {
-                    console.log("error ", data)
-                })
-        }
-
-        $scope.delpro = function() {
-            $http.post("/delproduct", $scope.form)
-                .success(function(data) {
-                    console.log("success ", data)
-                    if (data.message == "success") {
-                        $scope.msg = "product deleted"
-                    }
-                    if (data.message == "error") {
-                        $scope.msg = "no such product found"
-                    }
-                })
-                .error(function(data) {
-                    console.log("error ", data)
-                })
-        }
-
-        $http.get("/products")
-            .then(function(res) {
-                $scope.products = res.data;
-            })
-
-        $http.get("/posts")
-            .then(function(res) {
-                $scope.users = res.data;
-            })
-
-    })
-
-    app.controller('MyCtrl2', ['Upload', '$window', '$scope', function(Upload, $window, $scope) {
-        var vm = this;
-
-
-        vm.submit = function(file) {
-            Upload.upload({
-                url: 'http://localhost:3000/addproduct',
-                method: 'POST',
-                data: $scope.form
-            }).then(function(resp) {
-                if (resp.data.error_code === 0) {
-                    // $window.alert('Success ' + resp.config.data.file.name + 'uploaded. Response: ');
-                    console.log(resp.config.data.file.name)
-                } else {
-                    $window.alert('an error occured');
-                }
-            }, function(resp) {
-                console.log('Error status: ' + resp.status);
-                $window.alert('Error status: ' + resp.status);
-            }, function(evt) {
-                console.log(evt);
-                var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
-                vm.progress = 'progress: ' + progressPercentage + '% ';
-            });
-        };
-    }]);
+        /* swap open/close side menu icons */
+        $('[data-toggle=collapse]').click(function() {
+            // toggle icon
+            $(this).find("i").toggleClass("glyphicon-chevron-right glyphicon-chevron-down");
+        });
+    });
 </script>
 
 </html>

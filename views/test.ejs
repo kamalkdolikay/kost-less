@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+
+<head>
+    <title>Add / List Data (AngularJS)</title>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angularjs-datepicker/2.1.16/angular-datepicker.min.js"></script>
+    <style>
+        .list_data {
+            margin-bottom: 2rem
+        }
+        
+        table,
+        th,
+        td {
+            border: 1px solid #AAA
+        }
+        
+        th {
+            cursor: pointer
+        }
+    </style>
+</head>
+
+<body ng-controller="RecordCtrl">
+    <div class="list_data">
+        <h1>List Data</h1>
+        <table>
+            <tr>
+                <th ng-click="type = 'include'; reverse = !reverse">Status</th>
+                <th ng-click="type = 'state'; reverse = !reverse">State</th>
+                <th ng-click="type = 'price'; reverse = !reverse">Price</th>
+                <th ng-click="type = 'tax'; reverse = !reverse">Tax</th>
+                <th>Action</th>
+            </tr>
+            <tr ng-repeat="record in records | orderBy:type:reverse">
+                <td><input type="checkbox" ng-model="record.include"></td>
+                <td>{{record.state | uppercase}}</td>
+                <td>{{record.price | currency}}</td>
+                <td>{{record.tax | currency}}</td>
+                <td><button ng-click="Delete($index)">Delete</button></td>
+            </tr>
+            <tr>
+                <td colspan="2">Total</td>
+                <td>{{Totals().price | currency}}</td>
+                <td>{{Totals().tax | currency}}</td>
+                <td>&nbsp;</td>
+            </tr>
+        </table>
+        <button ng-show="history.length > 0" ng-click="Undo()">Undo Delete</button>
+    </div>
+
+    <div class="add_data">
+        <h1>Add Data</h1>
+        <form ng-submit="Add()">
+            <div class="field">
+                <label for="state">State: </label>
+                <input id="state" type="text" placeholder="State" maxlength="2" ng-model="newState">
+            </div>
+            <div class="field">
+                <label for="price">Price: </label>
+                <input id="price" type="number" placeholder="Price" min="0" ng-model="newPrice">
+            </div>
+            <div class="field">
+                <label for="tax">Tax: </label>
+                <input id="tax" type="number" placeholder="Tax" min="0" ng-model="newTax">
+            </div>
+            <div class="action">
+                <button type="submit">Add</button>
+                <button ng-click="Reset()">Reset</button>
+            </div>
+        </form>
+    </div>
+
+    <div ng-controller="myCtrl">
+        <ul>
+            <li ng-repeat="x in products">{{x}}</li>
+        </ul>
+        <input ng-model="form.id">
+        <input ng-model="form.name">
+        <input ng-model="form.price">
+        <input ng-model="form.category">
+        <button ng-click="addItem()">Add</button>
+    </div>
+
+    <div ng-controller="mainController as vm">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h3>Product List</h3>
+                        </div>
+                        <div class="row">
+                            <br>
+                            <div class="col-lg-3 text-right">
+                                <h4>Filter by date :</h4>
+                            </div>
+                            <div class="col-lg-6">
+                                <input date-range-picker name="daterange3" class="form-control date-picker" type="text" ng-model="date" options="opts" clearable="true" required/>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-responsive">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Code</th>
+                                        <th>Availabel</th>
+                                        <th>Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="product in vm.products">
+                                        <td>{{product.productName}}</td>
+                                        <td>{{product.productCode}}</td>
+                                        <td>{{product.releaseDate | date }}</td>
+                                        <td>{{product.price | currency}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+<script>
+    var app = angular.module('myApp', []);
+    app.controller('RecordCtrl', ['$scope', '$http', function($scope, $http) {
+        // Historical data
+        $scope.history = [];
+        // Default data (can be loaded from a database)
+        $scope.records = [{
+            state: 'CA',
+            price: 22,
+            tax: 5,
+            include: false
+        }, {
+            state: 'MA',
+            price: 32,
+            tax: 8,
+            include: false
+        }];
+        // Total prices
+        $scope.Totals = function() {
+            var priceTotal = 0;
+            var taxTotal = 0;
+            // Loop through main records and calculate aggregate prices and taxes if include is true
+            angular.forEach($scope.records, function(record) {
+                if (record.include) {
+                    priceTotal += record.price;
+                    taxTotal += record.tax;
+                }
+            });
+            // Return aggregate data
+            return {
+                price: priceTotal,
+                tax: taxTotal
+            };
+        };
+        // Delete data
+        $scope.Delete = function(index) {
+            // Remove first / oldest element from history if it reaches maximum capacity of 10 records
+            if ($scope.history.length === 10)
+                $scope.history.shift();
+            // Add deleted record to historical records
+            $scope.history.push($scope.records[index]);
+            // Remove from main records (using index)
+            $scope.records.splice(index, 1);
+        };
+        // Reset new data model
+        $scope.Reset = function() {
+            $scope.newState = '';
+            $scope.newPrice = 0;
+            $scope.newTax = 0;
+        }
+        $scope.Reset();
+        // Add new data
+        $scope.Add = function() {
+                // Do nothing if no state is entered (blank)
+                if (!$scope.newState)
+                    return;
+                // Add to main records
+                $scope.records.push({
+                    state: $scope.newState,
+                    price: $scope.newPrice,
+                    tax: $scope.newTax,
+                    include: false
+                });
+                // See $Scope.Reset...
+                $scope.Reset();
+            }
+            // Undo action (delete)
+        $scope.Undo = function() {
+            // Add last / most recent historical record to the main records
+            $scope.records.push($scope.history[$scope.history.length - 1]);
+            // Remove last / most recent historical record
+            $scope.history.pop();
+        }
+    }])
+
+    app.controller("myCtrl", function($scope, $http) {
+        //$scope.products = ["Milk", "Bread", "Cheese"];
+        $http.get("/products")
+            .then(function(res) {
+                $scope.products = res.data;
+            })
+
+        $scope.addItem = function() {
+            $http.post("/addproduct", $scope.form)
+                .then(function(data) {
+                    console.log("success", data)
+                    $scope.products.push(data);
+                })
+
+        }
+    });
+</script>
+
+</html>

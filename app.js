@@ -16,7 +16,6 @@ require('./models/Order.js');
 require('./config/passport.js');
 mongoose.connect('mongodb://localhost/test');
 
-
 var index = require('./routes/index');
 var users = require('./routes/users');
 

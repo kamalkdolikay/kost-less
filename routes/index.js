@@ -8,20 +8,6 @@ var User = mongoose.model('User');
 var Product = mongoose.model('Product');
 var Order = mongoose.model('Order');
 
-var datetimestamp = Date.now();
-var storage = multer.diskStorage({
-    destination: function(req, file, cb) {
-        cb(null, './public/images');
-    },
-    filename: function(req, file, cb) {
-        cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length - 1]);
-    }
-});
-
-var upload = multer({
-    storage: storage
-}).single('file');
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
     res.render('index', { title: 'Express' });
@@ -82,11 +68,44 @@ router.get('/logout', function(req, res) {
     });
 });
 
+router.get('/pagination', function(req, res) {
+    res.render('pagination');
+});
+
+router.get('/select', function(req, res) {
+    res.render('ui-select');
+});
+
+router.get('/test', function(req, res) {
+    res.render('test');
+});
+
+router.get('/dashboard/user', function(req, res) {
+    res.render('user');
+});
+
+router.get('/dashboard/orders', function(req, res) {
+    res.render('orders');
+});
+
 /* POST cpost page. */
 router.post("/cpost", function(req, res) {
-    User.findByIdAndUpdate(req.session.passport.user, { $set: { username: req.body.user, password: req.body.pass } }, function(err, docs) {
+    console.log("values ", req.body);
+    User.findByIdAndUpdate(req.session.passport.user, {
+        $set: {
+            firstname: req.body.first,
+            lastname: req.body.last,
+            email: req.body.email,
+            address: req.body.address,
+            city: req.body.city,
+            country: req.body.country,
+            postalcode: req.body.postal,
+            aboutme: req.body.about
+        }
+    }, function(err, docs) {
         console.log(docs);
-        if (docs === null) {
+        console.log(err);
+        if (docs == null) {
             res.json({ "err": err });
         } else {
             res.json({ "message": "success" });
@@ -138,6 +157,19 @@ router.post('/login', function(req, res, next) {
 
 /* POST upload page. */
 router.post('/upload', function(req, res) {
+    var datetimestamp = Date.now();
+    var storage = multer.diskStorage({
+        destination: function(req, file, cb) {
+            cb(null, './public/images');
+        },
+        filename: function(req, file, cb) {
+            cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length - 1]);
+        }
+    });
+
+    var upload = multer({
+        storage: storage
+    }).single('file');
     upload(req, res, function(err) {
         console.log("file", req.file);
         console.log("all", req.body);
@@ -180,10 +212,37 @@ router.post("/delete", function(req, res) {
 });
 
 router.post("/addproduct", function(req, res) {
+    var datetimestamp = Date.now();
+    var storage = multer.diskStorage({
+        destination: function(req, file, cb) {
+            cb(null, './public/images');
+        },
+        filename: function(req, file, cb) {
+            cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length - 1]);
+        }
+    });
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+
+    if (dd < 10) {
+        dd = '0' + dd
+    }
+
+    if (mm < 10) {
+        mm = '0' + mm
+    }
+
+    today = dd + '/' + mm + '/' + yyyy;
+
+    var upload = multer({
+        storage: storage
+    }).single('file');
     upload(req, res, function(err) {
-        console.log("name", req.body.name);
         console.log("all", req.body);
         console.log("file", req.file);
+        console.log("filename", req.file.filename);
         if (err) {
             res.json({ error_code: 1, err_desc: err });
             return;
@@ -193,8 +252,11 @@ router.post("/addproduct", function(req, res) {
                 product_name: req.body.name,
                 product_price: req.body.price,
                 product_category: req.body.category,
-                image: req.file.filename
+                image: req.file.filename,
+                date: today
             }).save(function(err, docs) {
+                console.log("docs ", docs);
+                console.log("err ", err);
                 if (docs === null) {
                     res.json({ "message": "error" });
                 } else {

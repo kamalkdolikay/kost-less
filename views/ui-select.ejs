@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="utf-8">
+    <title>Dynamic Pagination w/ Filtering</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Kim Maida">
+
+    <!-- JS Libraries -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div ng-controller="PageCtrl">
+        <div ng-controller="PageCtrl">
+            <label>Search:</label> <input type="text" ng-model="search.product_name" placeholder="Search" />
+            <br />
+
+            <label>Filter by Category:</label>
+            <ul>
+                <li><a href="" ng-click="search.category='engineering'">Engineering</a></li>
+                <li><a href="" ng-click="search.category='management'">Management</a></li>
+                <li><a href="" ng-click="search.category='business'">Business</a></li>
+            </ul>
+
+            <label>Filter by Branch:</label>
+            <ul>
+                <li><a href="" ng-click="search.branch='West'">West</a></li>
+                <li><a href="" ng-click="search.branch='East'">East</a></li>
+            </ul>
+
+            <p><strong><a href="" ng-click="resetFilters()">Show All</a></strong></p>
+
+            <h1>Items</h1>
+            <ul>
+                <li ng-repeat="item in filtered = items | filter:search | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">{{item.product_name}}</li>
+            </ul>
+
+            <!--<pagination page="currentPage" max-size="noOfPages" total-items="totalItems" items-per-page="entryLimit" max-size="maxSize" boundary-links="true" rotate="false" num-pages="numPages" class="pagination-sm"></pagination>-->
+            <ul uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" items-per-page="entryLimit"></ul>
+            <pre>Page: {{currentPage}} / {{numPages}}</pre> View <select ng-model="viewby" ng-change="setItemsPerPage(viewby)"><option>3</option><option>5</option><option>10</option><option>20</option><option>30</option><option>40</option><option>50</option></select>            records at a time.
+        </div>
+
+</body>
+<script>
+    var app = angular.module('myApp', ['ui.bootstrap']);
+
+    app.filter('startFrom', function() {
+        return function(input, start) {
+            if (input) {
+                start = +start;
+                return input.slice(start);
+            }
+            return [];
+        };
+    });
+
+    app.controller('PageCtrl', ['$scope', 'filterFilter', '$http', function($scope, filterFilter, $http) {
+        $http.get("/products")
+            .then(function(res) {
+                $scope.items = res.data;
+                $scope.search = {};
+
+                $scope.resetFilters = function() {
+                    // needs to be a function or it won't trigger a $watch
+                    $scope.search = {};
+                };
+
+                // pagination controls
+                $scope.currentPage = 1;
+                $scope.totalItems = $scope.items.length;
+                $scope.entryLimit = 1; // items per page
+                $scope.maxSize = 5;
+                $scope.setPage = function(pageNo) {
+                    $scope.currentPage = pageNo;
+                };
+                $scope.setItemsPerPage = function(num) {
+                    $scope.entryLimit = num;
+                    $scope.currentPage = 1; //reset to first page
+                }
+
+                $scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
+
+                // $watch search to update pagination
+                $scope.$watch('search', function(newVal, oldVal) {
+                    $scope.filtered = filterFilter($scope.items, newVal);
+                    $scope.totalItems = $scope.filtered.length;
+                    $scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
+                    $scope.currentPage = 1;
+                }, true);
+            })
+
+
+        // create empty search model (object) to trigger $watch on update
+
+    }]);
+</script>
+
+</html>

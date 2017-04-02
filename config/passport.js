@@ -24,11 +24,12 @@ passport.use('register', new LocalStrategy({
         passReqToCallback: true
     },
     function(req, user, pass, done) {
-        console.log("type", req.body.type);
+        //console.log("type", req.body.type);
         User({
             username: user,
             password: pass,
-            type: req.body.type
+            type: "user",
+            email: req.body.email
         }).save(function(err, user) {
             console.log("err ", err);
             console.log("user ", user);
