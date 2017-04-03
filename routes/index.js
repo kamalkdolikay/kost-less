@@ -37,6 +37,16 @@ router.get('/products', function(req, res) {
     });
 });
 
+/* POST posts page. */
+router.post('/cproduct', function(req, res) {
+    console.log("all ", req.body)
+    Product.find({ product_id: req.body.id }, function(err, docs) {
+        console.log("err", err)
+        console.log("docs", docs)
+        res.send(docs);
+    });
+});
+
 /* GET orders page. */
 router.get("/orders", function(req, res) {
     Order.find({}, function(err, data) {
@@ -280,16 +290,73 @@ router.post("/addproduct", function(req, res) {
 
 router.post("/delproduct", function(req, res) {
     console.log("id", req.body.id);
-    console.log("name", req.body.name);
-    Product.findOneAndRemove({ product_id: req.body.id, product_name: req.body.name }, function(err, docs) {
+    Product.findOneAndRemove({ product_id: req.body.id }, function(err, docs) {
         console.log("error ", err);
         console.log("data ", docs);
-        if (docs === null) {
+        if (docs == null) {
             res.json({ "message": "error" });
         } else {
             res.json({ "message": "success" });
         }
     });
+});
+
+router.post("/uproduct", function(req, res) {
+    var datetimestamp = Date.now();
+    var storage = multer.diskStorage({
+        destination: function(req, file, cb) {
+            cb(null, './public/images');
+        },
+        filename: function(req, file, cb) {
+            cb(null, file.fieldname + '-' + datetimestamp + '.' + file.originalname.split('.')[file.originalname.split('.').length - 1]);
+        }
+    });
+
+    var upload = multer({
+        storage: storage
+    }).single('file');
+
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+
+    if (dd < 10) {
+        dd = '0' + dd;
+    }
+
+    if (mm < 10) {
+        mm = '0' + mm;
+    }
+
+    today = mm + '/' + dd + '/' + yyyy;
+    upload(req, res, function(err) {
+        console.log("all", req.body);
+        console.log("file", req.file);
+        console.log("filename", req.file.filename);
+        if (err) {
+            res.json({ error_code: 1, err_desc: err });
+            return;
+        } else {
+            Product.update({ product_id: req.body.id }, {
+                $set: {
+                    product_name: req.body.name,
+                    product_price: req.body.price,
+                    product_category: req.body.category,
+                    image: req.file.filename,
+                    date: today
+                }
+            }, function(err, docs) {
+                console.log("err", err);
+                console.log("docs", docs);
+                if (docs == "") {
+                    res.json({ "message": err });
+                } else {
+                    res.json({ "message": "success" });
+                }
+            });
+        }
+    })
 });
 
 router.post("/orders", function(req, res) {

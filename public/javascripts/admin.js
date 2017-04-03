@@ -65,6 +65,38 @@ app.controller("main", function($scope, $http) {
             })
     }
 
+    $scope.upro = function() {
+        $http.post("/uproduct", $scope.form)
+            .success(function(data) {
+                console.log("success ", data)
+                if (data.message == "success") {
+                    $scope.msg = "product updated";
+                }
+                if (data.message == "error") {
+                    $scope.msg = "product not found";
+                }
+            })
+            .error(function(data) {
+                console.log("error ", data)
+            })
+    }
+
+    $scope.deluser = function(username) {
+        $http.post("/delete", { name: username })
+            .success(function(data) {
+                console.log("success", data)
+                if (data.message == "success") {
+                    $scope.msg = "user deleted"
+                }
+                if (data.message == "error") {
+                    $scope.msg = "enter a valid user"
+                }
+            })
+            .error(function(data) {
+                console.log("error ", data)
+            })
+    };
+
     $http.get("/products")
         .then(function(res) {
             $scope.products = res.data;
@@ -73,8 +105,7 @@ app.controller("main", function($scope, $http) {
     $http.get("/posts")
         .then(function(res) {
             $scope.users = res.data;
-        })
-
+        });
 })
 
 app.filter('startFrom', function() {
@@ -87,7 +118,7 @@ app.filter('startFrom', function() {
     };
 });
 
-app.controller('PageCtrl', ['$scope', 'filterFilter', '$http', function($scope, filterFilter, $http) {
+app.controller('PageCtrl', ['Upload', '$window', '$scope', '$rootScope', 'filterFilter', '$http', function(Upload, $window, $scope, $rootScope, filterFilter, $http) {
     $http.get("/products")
         .then(function(res) {
             $scope.items = res.data;
@@ -122,8 +153,73 @@ app.controller('PageCtrl', ['$scope', 'filterFilter', '$http', function($scope, 
             }, true);
         })
 
+    $scope.delete = function(product_id) {
+        $http.post("/delproduct", { id: product_id })
+            .success(function(data) {
+                console.log("success ", data);
+                if (data.message == "success") {
+                    $scope.msg = "product deleted";
+                }
+            })
+            .error(function(data) {
+                console.log("error ", data);
+            });
+    };
 
-    // create empty search model (object) to trigger $watch on update
+    $scope.update = function(product_id) {
+        console.log("id ", product_id)
+        $scope.lol = product_id;
+        $http.post("/cproduct", { id: product_id })
+            .success(function(res) {
+                console.log("up res", res[0]["product_id"]);
+                $rootScope.form1 = {};
+                $rootScope.form1.id = res[0]["product_id"];
+                $rootScope.form1.name = res[0]["product_name"];
+                $rootScope.form1.price = res[0]["product_price"];
+                $rootScope.form1.image = res[0]["image"];
+                $rootScope.form1.category = res[0]["product_category"];
+            })
+    }
+
+    $scope.upro = function() {
+        $http.post("/uproduct", $scope.form1)
+            .success(function(data) {
+                console.log("success ", data)
+                if (data.message == "success") {
+                    $scope.msg = "product updated";
+                }
+                if (data.message == "error") {
+                    $scope.msg = "product not found";
+                }
+            })
+            .error(function(data) {
+                console.log("error ", data)
+            })
+    }
+
+    var vm = this;
+
+    vm.submit = function(file) {
+        Upload.upload({
+            url: 'http://localhost:3000/uproduct',
+            method: 'POST',
+            data: $scope.form1
+        }).then(function(resp) {
+            if (resp.data.error_code === 0) {
+                console.log(resp.config.data.file.name)
+            } else {
+                $window.alert('an error occured');
+            }
+        }, function(resp) {
+            console.log('Error status: ' + resp.status);
+            $window.alert('Error status: ' + resp.status);
+        }, function(evt) {
+            console.log(evt);
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+            vm.progress = 'progress: ' + progressPercentage + '% ';
+        });
+    };
 
 }]);
 
@@ -156,7 +252,7 @@ app.controller('MyCtrl2', ['Upload', '$window', '$scope', '$http', function(Uplo
     $http.get("/lastid")
         .then(function(res) {
             $scope.orders1 = res.data;
-            $scope.form = {}
+            $scope.form = {};
             $scope.form.id = (res.data[0]["product_id"] + 1);
         })
 

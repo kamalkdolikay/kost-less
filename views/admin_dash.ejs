@@ -202,34 +202,6 @@
                             <!--/panel content-->
                         </div>
 
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <div class="panel-title">
-                                    <i class="glyphicon glyphicon-wrench pull-right"></i>
-                                    <h4>Delete User</h4>
-                                </div>
-                            </div>
-                            <div class="panel-body">
-                                <form class="form form-vertical" ng-controller="main" ng-submit="delusr()">
-                                    <div class="control-group">
-                                        <label>Name</label>
-                                        <div class="controls">
-                                            <input type="text" class="form-control" placeholder="name" ng-model="form.name" required>
-                                        </div>
-                                    </div>
-                                    <div class="control-group">
-                                        <label></label>
-                                        <div class="controls">
-                                            <button type="submit" class="btn btn-primary">
-                                            Delete
-                                        </button> {{msg}}
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <!--/panel content-->
-                        </div>
-
                         <!--/panel-->
                         <!--<div class="well">Inbox Messages <span class="badge pull-right">3</span></div>
 
@@ -394,9 +366,9 @@
                             <div class="panel-body">
                                 <form class="form form-vertical" ng-controller="MyCtrl2 as up" ng-submit="up.submit()">
                                     <div class="control-group">
-                                        <label>ID</label>
+                                        <!--<label>ID</label>-->
                                         <div class="controls">
-                                            <input type="text" class="form-control" disabled placeholder="id" ng-model="form.id" required>
+                                            <input type="hidden" class="form-control" placeholder="id" ng-model="form.id" required>
                                         </div>
                                     </div>
                                     <div class="control-group">
@@ -455,40 +427,6 @@
                         </div>
                         <!--/panel-->
 
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <div class="panel-title">
-                                    <i class="glyphicon glyphicon-wrench pull-right"></i>
-                                    <h4>Delete Product</h4>
-                                </div>
-                            </div>
-                            <div class="panel-body">
-                                <form class="form form-vertical" ng-controller="main" ng-submit="delpro()">
-                                    <div class="control-group">
-                                        <label>ID</label>
-                                        <div class="controls">
-                                            <input type="number" class="form-control" placeholder="id" ng-model="form.id" required>
-                                        </div>
-                                    </div>
-                                    <div class="control-group">
-                                        <label>Name</label>
-                                        <div class="controls">
-                                            <input type="text" class="form-control" placeholder="name" ng-model="form.name" required>
-                                        </div>
-                                    </div>
-                                    <div class="control-group">
-                                        <label></label>
-                                        <div class="controls">
-                                            <button type="submit" class="btn btn-primary">
-                                            Delete
-                                        </button> {{msg}}
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <!--/panel content-->
-                        </div>
-
                         <!--<div class="panel panel-default">
                             <div class="panel-heading">
                                 <div class="panel-title">
@@ -542,18 +480,29 @@
                                 <table class="table">
                                     <thead>
                                         <tr class="filters">
-                                            <th><input type="text" class="form-control" placeholder="#" disabled></th>
-                                            <th><input type="text" class="form-control" placeholder="Name" disabled></th>
-                                            <th><input type="text" class="form-control" placeholder="Price" disabled></th>
-                                            <th><input type="text" class="form-control" placeholder="Image" disabled></th>
+                                            <th>Product ID</th>
+                                            <th>Product Name</th>
+                                            <th>Product Price</th>
+                                            <th>Product Category</th>
+                                            <th>Product Image</th>
                                         </tr>
                                     </thead>
                                     <tbody ng-repeat="item in filtered = items | filter:search | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit">
                                         <tr>
                                             <td>{{item.product_id}}</td>
                                             <td>{{item.product_name}}</td>
-                                            <td>{{item.product_price}}</td>
+                                            <td>{{item.product_price | currency:"₹"}}</td>
+                                            <td>{{item.product_category}}</td>
                                             <td><img src="./images/{{item.image}}" style="width:100px; height:100px;"></td>
+                                            <td class="td-actions">
+                                                <a title="Add Widget" data-toggle="modal" href="#addWidgetModal">
+                                                    <button type="submit" rel="tooltip" ng-click='update(item.product_id)' title="Edit" class="btn btn-info btn-simple">
+                                                        <i class="fa fa-edit"></i>
+                                                    </button></a>
+                                                <button type="submit" rel="tooltip" ng-click='delete(item.product_id)' title="Remove" class="btn btn-danger btn-simple">
+                                                    <i class="fa fa-times"></i>
+                                                </button>
+                                            </td>
                                         </tr>
                                     </tbody>
 
@@ -561,7 +510,7 @@
                             </div>
 
                         </div>
-                        View <select ng-model="viewby" ng-change="setItemsPerPage(viewby)"><option>3</option><option>5</option><option>10</option><option>20</option><option>30</option><option>40</option><option>50</option></select> records at a time.
+                        View <select ng-model="viewby" ng-change="setItemsPerPage(viewby)"><option>1</option><option>3</option><option>5</option><option>10</option><option>15</option><option>20</option></select> records at a time.
                         <ul uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" items-per-page="entryLimit"></ul>
                         <pre>Page: {{currentPage}} / {{numPages}}</pre>
                         <hr />
@@ -572,28 +521,37 @@
                     <div class="col-md-12">
                         <div class="panel panel-success">
                             <div class="panel-heading">
-                                <h3 class="panel-title">My Orders</h3>
+                                <h3 class="panel-title">Users</h3>
                                 <div class="pull-right">
                                 </div>
                             </div>
-                            <div class="panel-body">
+                            <!--<div class="panel-body">
                                 <input type="text" class="form-control" id="task-table-filter" data-action="filter" data-filters="#task-table" placeholder="Filter Orders" />
-                            </div>
+                            </div>-->
                             <table class="table table-hover" id="task-table" ng-controller="main">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
-                                        <th>Name</th>
-                                        <th>Price</th>
-                                        <th>Image</th>
+                                        <th>User ID</th>
+                                        <th>User Name</th>
+                                        <th>User Email</th>
+                                        <th>User Image</th>
                                     </tr>
                                 </thead>
                                 <tbody ng-repeat="user in users">
                                     <tr>
-                                        <td>1</td>
+                                        <td>{{user._id}}</td>
                                         <td>{{user.username}}</td>
-                                        <td>{{user.type}}</td>
+                                        <td>{{user.email}}</td>
                                         <td><img src="./images/{{user.image}}" style="width:100px; height:100px;"></td>
+                                        <td class="td-actions">
+                                            <!--<a title="Add Widget" data-toggle="modal" href="#addWidgetModal">
+                                                <button type="submit" rel="tooltip" ng-click='update(item.product_id)' title="Edit" class="btn btn-info btn-simple">
+                                                    <i class="fa fa-edit"></i>
+                                                </button></a>-->
+                                            <button type="submit" rel="tooltip" ng-click='deluser(user.username)' title="Remove" class="btn btn-danger btn-simple">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </td>
                                     </tr>
 
                                 </tbody>
@@ -615,19 +573,67 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h4 class="modal-title">Add Widget</h4>
+                    <h4 class="modal-title">Update Product</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Add a widget stuff here..</p>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <div class="panel-title">
+                                <i class="glyphicon glyphicon-wrench pull-right"></i>
+                                <h4>Update</h4>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <form class="form form-vertical" ng-controller="PageCtrl as up" ng-submit="up.submit()">
+                                <div class="control-group">
+                                    <label>ID</label>
+                                    <div class="controls">
+                                        <input type="text" class="form-control" placeholder="id" ng-model="form1.id" required>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label>Name</label>
+                                    <div class="controls">
+                                        <input type="text" class="form-control" placeholder="name" ng-model="form1.name" required>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label>Price</label>
+                                    <div class="controls">
+                                        <input type="text" class="form-control" placeholder="price" ng-model="form1.price" required>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label>Category</label>
+                                    <div class="controls">
+                                        <input type="text" class="form-control" placeholder="category" ng-model="form1.category" required>
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label>Image</label>
+                                    <div class="controls">
+                                        <input type="file" ngf-select ng-model="form1.file" ngf-pattern="'image/*'" accept="image/*" ngf-max-size="20MB" class="form-control" id="concept" required />
+                                    </div>
+                                </div>
+                                <div class="control-group">
+                                    <label></label>
+                                    <div class="controls">
+                                        <button type="submit" class="btn btn-primary">
+                                            Update
+                                        </button> {{msg}}
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!--/panel content-->
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <a href="#" data-dismiss="modal" class="btn">Close</a>
                     <a href="#" class="btn btn-primary">Save changes</a>
                 </div>
             </div>
-            <!-- /.modal-content -->
         </div>
-        <!-- /.modal-dalog -->
     </div>
     <!-- /.modal -->
 
