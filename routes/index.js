@@ -62,6 +62,16 @@ router.get("/cpost", function(req, res) {
     });
 });
 
+router.get("/lastid", function(req, res) {
+    Product.find().limit(1).sort({ $natural: -1 }).exec(function(err, docs) {
+        if (err) {
+            res.json({ "err": err });
+        } else {
+            res.json(docs);
+        }
+    });
+});
+
 router.get('/logout', function(req, res) {
     req.session.destroy(function(err) {
         res.redirect('/');
@@ -234,7 +244,7 @@ router.post("/addproduct", function(req, res) {
         mm = '0' + mm
     }
 
-    today = dd + '/' + mm + '/' + yyyy;
+    today = mm + '/' + dd + '/' + yyyy;
 
     var upload = multer({
         storage: storage
@@ -283,8 +293,10 @@ router.post("/delproduct", function(req, res) {
 });
 
 router.post("/orders", function(req, res) {
+    console.log("req.body", req.body)
     Product.find({ product_name: req.body.name }, function(err, docs) {
-        if (err) {
+        console.log("docs", docs)
+        if (docs == "") {
             res.json({ "err": err });
         } else {
             var id = docs[0]["_id"];

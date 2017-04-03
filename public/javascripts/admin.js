@@ -127,7 +127,7 @@ app.controller('PageCtrl', ['$scope', 'filterFilter', '$http', function($scope, 
 
 }]);
 
-app.controller('MyCtrl2', ['Upload', '$window', '$scope', function(Upload, $window, $scope) {
+app.controller('MyCtrl2', ['Upload', '$window', '$scope', '$http', function(Upload, $window, $scope, $http) {
     var vm = this;
 
     vm.submit = function(file) {
@@ -152,4 +152,12 @@ app.controller('MyCtrl2', ['Upload', '$window', '$scope', function(Upload, $wind
             vm.progress = 'progress: ' + progressPercentage + '% ';
         });
     };
+
+    $http.get("/lastid")
+        .then(function(res) {
+            $scope.orders1 = res.data;
+            $scope.form = {}
+            $scope.form.id = (res.data[0]["product_id"] + 1);
+        })
+
 }]);

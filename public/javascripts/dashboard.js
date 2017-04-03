@@ -79,9 +79,18 @@ app.controller('MainCtrl', [
                 })
         }
 
+        $scope.logout = function() {
+            $http.get("/logout")
+                .success(function(data) {
+                    console.log("logout data", data)
+                    window.location.href = 'http://localhost:3000/#/login2';
+                })
+        }
+
         $scope.from = new Date();
-        $scope.from.setMonth($scope.from.getMonth() - 1);
+        $scope.from.setMonth($scope.from.getDay() - 1);
         $scope.to = new Date();
+        $scope.to.setMonth($scope.from.getDay());
 
     }
 ])
@@ -131,6 +140,19 @@ app.controller('PageCtrl', ['$scope', 'filterFilter', '$http', function($scope, 
             }, true);
         })
 
+    $scope.order1 = function(product_name) {
+        $http.post("/orders", { name: product_name })
+            .success(function(data) {
+                console.log("success ", data)
+                if (data.message == "success") {
+                    $scope.msg = "order successfull"
+                }
+            })
+            .error(function(data) {
+                console.log("error ", data)
+            })
+    }
+
 
     // create empty search model (object) to trigger $watch on update
 
@@ -138,9 +160,9 @@ app.controller('PageCtrl', ['$scope', 'filterFilter', '$http', function($scope, 
 
 app.controller('MyCtrl2', ['Upload', '$window', '$scope', function(Upload, $window, $scope) {
     var vm = this;
-    vm.submit = function() { //function to call on form submit
-        if (vm.upload_form.file.$valid && vm.file) { //check if from is valid
-            vm.upload(vm.file); //call upload function
+    vm.submit = function() {
+        if (vm.upload_form.file.$valid && vm.file) {
+            vm.upload(vm.file);
         }
     }
 
