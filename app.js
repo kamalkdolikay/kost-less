@@ -13,6 +13,7 @@ mongoose.Promise = global.Promise;
 require('./models/User.js');
 require('./models/Product.js');
 require('./models/Order.js');
+require('./models/product_category');
 require('./config/passport.js');
 mongoose.connect('mongodb://localhost/test');
 
@@ -32,10 +33,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'views')));
 
 /** My code */
 app.use(session({
-    secret: 'jhon snow',
+    secret: 'john snow',
     resave: true,
     saveUninitialized: true
 }));

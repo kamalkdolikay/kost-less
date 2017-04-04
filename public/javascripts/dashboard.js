@@ -87,10 +87,10 @@ app.controller('MainCtrl', [
                 })
         }
 
-        $scope.from = new Date();
-        $scope.from.setMonth($scope.from.getDay() - 1);
-        $scope.to = new Date();
-        $scope.to.setMonth($scope.from.getDay());
+        // $scope.from = new Date();
+        // $scope.from.setMonth($scope.from.getDay() - 1);
+        // $scope.to = new Date();
+        // $scope.to.setMonth($scope.from.getDay());
 
     }
 ])
@@ -129,6 +129,10 @@ app.controller('PageCtrl', ['$scope', 'filterFilter', '$http', function($scope, 
                 $scope.currentPage = 1; //reset to first page
             }
 
+            $scope.setCategory = function(cat) {
+                $scope.search.product_category = cat
+            }
+
             $scope.noOfPages = Math.ceil($scope.totalItems / $scope.entryLimit);
 
             // $watch search to update pagination
@@ -145,6 +149,8 @@ app.controller('PageCtrl', ['$scope', 'filterFilter', '$http', function($scope, 
             .success(function(data) {
                 console.log("success ", data)
                 if (data.message == "success") {
+                    alert("Order Successfull")
+                    window.location.reload()
                     $scope.msg = "order successfull"
                 }
             })
@@ -152,6 +158,11 @@ app.controller('PageCtrl', ['$scope', 'filterFilter', '$http', function($scope, 
                 console.log("error ", data)
             })
     }
+
+    $http.get("/getcat")
+        .then(function(res) {
+            $scope.category = res.data;
+        });
 
 
     // create empty search model (object) to trigger $watch on update

@@ -5,7 +5,8 @@ var Schema = mongoose.Schema;
 var OrderSchema = new Schema({
     user_id: { type: Schema.Types.ObjectId, ref: 'User' },
     product_id: { type: Schema.Types.ObjectId, ref: 'Product' },
-    product_price: Number
+    product_price: Number,
+    date: String
 });
 
 mongoose.model('Order', OrderSchema, 'Order');

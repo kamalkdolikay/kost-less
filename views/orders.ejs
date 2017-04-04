@@ -33,37 +33,7 @@
 <body ng-app="K">
 
     <div class="wrapper">
-        <div class="sidebar" data-color="purple" data-image="assets/img/sidebar-5.jpg">
-
-            <div class="sidebar-wrapper" ng-controller="MainCtrl">
-                <div class="logo">
-                    <a href="" class="simple-text">
-                    Hello {{settings.username}}
-                </a>
-                </div>
-
-                <ul class="nav">
-                    <li>
-                        <a href="/dashboard">
-                            <i class="pe-7s-graph"></i>
-                            <p>Dashboard</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/dashboard/user">
-                            <i class="pe-7s-user"></i>
-                            <p>User Profile</p>
-                        </a>
-                    </li>
-                    <li class="active">
-                        <a href="/dashboard/orders">
-                            <i class="pe-7s-note2"></i>
-                            <p>Orders</p>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        <div ng-include="'/header.html'"></div>
 
         <div class="main-panel">
             <nav class="navbar navbar-default navbar-fixed">
@@ -75,16 +45,16 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                        <a class="navbar-brand" href="#">Table List</a>
+                        <a class="navbar-brand" href="#">Orders</a>
                     </div>
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-left">
-                            <li>
+                            <!--<li>
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="fa fa-dashboard"></i>
                                 </a>
-                            </li>
-                            <li class="dropdown">
+                            </li>-->
+                            <!--<li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="fa fa-globe"></i>
                                     <b class="caret"></b>
@@ -97,7 +67,7 @@
                                     <li><a href="#">Notification 4</a></li>
                                     <li><a href="#">Another notification</a></li>
                                 </ul>
-                            </li>
+                            </li>-->
                             <li>
                                 <a href="">
                                     <i class="fa fa-search"></i>
@@ -106,30 +76,27 @@
                         </ul>
 
                         <ul class="nav navbar-nav navbar-right">
-                            <li>
+                            <!--<li>
                                 <a href="">
                                Account
                             </a>
-                            </li>
+                            </li>-->
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    Dropdown
+                                    Account
                                     <b class="caret"></b>
                               </a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#">Action</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something</a></li>
+                                    <li><a href="/dashboard">Dashboard</a></li>
+                                    <li><a href="/dashboard/user">Your Profile</a></li>
+                                    <li><a href="/dashboard/orders">Orders</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="#">Separated link</a></li>
+                                    <li ng-controller="MainCtrl">
+                                        <a href="#" ng-click="logout()">
+                                            Log out
+                                        </a>
+                                    </li>
                                 </ul>
-                            </li>
-                            <li ng-controller="MainCtrl">
-                                <a href="#" ng-click="logout()">
-                                Log out
-                            </a>
                             </li>
                         </ul>
                     </div>
@@ -169,12 +136,12 @@
                                                     <button type="submit" ng-click='order1(item.product_name)' rel="tooltip" title="Order" class="btn btn-info btn-simple">
                                                             <i class="fa fa-plus"></i>
                                                         </button>
-                                                    <button type="button" rel="tooltip" title="Edit" class="btn btn-info btn-simple">
+                                                    <!--<button type="button" rel="tooltip" title="Edit" class="btn btn-info btn-simple">
                                                         <i class="fa fa-edit"></i>
                                                     </button>
                                                     <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple">
                                                         <i class="fa fa-times"></i>
-                                                    </button>
+                                                    </button>-->
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -183,10 +150,14 @@
                                     <!--<pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" items-per-page="itemsPerPage"></pagination>old ver of ui-->
                                     <!--<ul uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false" num-pages="numPages" items-per-page="itemsPerPage"></ul>-->
                                     <ul uib-pagination total-items="totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" num-pages="numPages" items-per-page="entryLimit"></ul>
-                                    <pre>Page: {{currentPage}} / {{numPages}}</pre> Filter by
-                                    <li><a href="" ng-click="search.product_category='fan'">fan</a></li>
+                                    <pre>Page: {{currentPage}} / {{numPages}}</pre>
+                                    <select ng-model="cat" ng-change="setCategory(cat)">
+                                        <option ng-repeat="cat in category">{{cat.category}}</option>
+                                        <option>animal</option>
+                                    </select> Filter by Category
+                                    <!--<li><a href="" ng-click="search.product_category='fan'">fan</a></li>
                                     <li><a href="" ng-click="search.product_category='mobile'">mobile</a></li>
-                                    <li><a href="" ng-click="search.product_category='animal'">animal</a></li>
+                                    <li><a href="" ng-click="search.product_category='animal'">animal</a></li>-->
                                     <p><strong><a href="" ng-click="resetFilters()">Reset Filter</a></strong></p>
 
                                 </div>
@@ -213,7 +184,7 @@
                                             <tr>
                                                 <td>{{order._id}}</td>
                                                 <td>{{order.product_id.product_name}}</td>
-                                                <td>${{order.product_id.product_price}}</td>
+                                                <td>{{order.product_id.product_price | currency:"₹"}}</td>
                                                 <td>{{order.product_id.product_category}}</td>
                                                 <td><img src="../images/{{order.product_id.image}}" style="width:100px; height:100px;"></td>
                                             </tr>
@@ -267,18 +238,20 @@
                                     <table class="table table-hover table-striped">
                                         <thead>
                                             <th>Product ID</th>
+                                            <th>Order Date</th>
                                             <th>Product Name</th>
                                             <th>Product Price</th>
                                             <th>Product Category</th>
                                             <th>Product Image</th>
                                         </thead>
-                                        <tbody ng-repeat="item in prods | dateFilter:from:to">
+                                        <tbody ng-repeat="order in orders | dateFilter:from:to">
                                             <tr>
-                                                <td>{{item.date}}</td>
-                                                <td>{{item.product_name}}</td>
-                                                <td>{{item.product_price | currency:"₹"}}</td>
-                                                <td>{{item.product_category}}</td>
-                                                <td><img src="../images/{{item.image}}" style="width:100px; height:100px;"></td>
+                                                <td>{{order._id}}</td>
+                                                <td>{{order.date}}</td>
+                                                <td>{{order.product_id.product_name}}</td>
+                                                <td>{{order.product_id.product_price | currency:"₹"}}</td>
+                                                <td>{{order.product_id.product_category}}</td>
+                                                <td><img src="../images/{{order.product_id.image}}" style="width:100px; height:100px;"></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -289,37 +262,7 @@
                     </div>
                 </div>
 
-                <footer class="footer">
-                    <div class="container-fluid">
-                        <nav class="pull-left">
-                            <ul>
-                                <li>
-                                    <a href="#">
-                                Home
-                            </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                Company
-                            </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                Portfolio
-                            </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                               Blog
-                            </a>
-                                </li>
-                            </ul>
-                        </nav>
-                        <p class="copyright pull-right">
-                            &copy; 2016 <a href="#">Kreative</a>, made with love for a better web
-                        </p>
-                    </div>
-                </footer>
+                <div ng-include="'/footer.html'"></div>
 
 
             </div>

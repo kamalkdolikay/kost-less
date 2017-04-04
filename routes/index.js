@@ -7,6 +7,7 @@ var multer = require('multer');
 var User = mongoose.model('User');
 var Product = mongoose.model('Product');
 var Order = mongoose.model('Order');
+var ProductCat = mongoose.model('ProductCat');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -20,7 +21,14 @@ router.get('/dashboard', function(req, res, next) {
 
 /* GET admin dashboard page. */
 router.get('/admin', function(req, res, next) {
-    res.render('admin_dash');
+    console.log("session ", req.session)
+    if (req.session) {
+        if (req.session.passport.user == '58d3b91a306f5b1de2628183') {
+            res.render('admin_dash');
+        } else {
+            res.render('error')
+        }
+    }
 });
 
 /* GET posts page. */
@@ -32,7 +40,7 @@ router.get('/posts', function(req, res) {
 
 /* GET posts page. */
 router.get('/products', function(req, res) {
-    Product.find({}, function(err, docs) {
+    Product.find({ status: "ok" }, function(err, docs) {
         res.send(docs);
     });
 });
@@ -50,6 +58,13 @@ router.post('/cproduct', function(req, res) {
 /* GET orders page. */
 router.get("/orders", function(req, res) {
     Order.find({}, function(err, data) {
+        res.send(data);
+    });
+});
+
+/* GET orders page. */
+router.get("/getcat", function(req, res) {
+    ProductCat.find({}, function(err, data) {
         res.send(data);
     });
 });
@@ -107,6 +122,19 @@ router.get('/dashboard/user', function(req, res) {
 router.get('/dashboard/orders', function(req, res) {
     res.render('orders');
 });
+
+router.post("/productcat", function(req, res) {
+    console.log("product cat ", req.body)
+    ProductCat({
+        category: req.body.category
+    }).save(function(err, docs) {
+        if (docs == null) {
+            res.json({ "message": err })
+        } else {
+            res.json({ "message": "success" })
+        }
+    })
+})
 
 /* POST cpost page. */
 router.post("/cpost", function(req, res) {
@@ -200,7 +228,7 @@ router.post('/upload', function(req, res) {
             //console.log(datetimestamp)
             User.findByIdAndUpdate(req.session.passport.user, { $set: { image: req.file.filename } }, function(err, docs) {
                 console.log(docs);
-                if (docs === null) {
+                if (docs == null) {
                     res.json({ "err": err });
                 } else {
                     res.json({ error_code: 0, err_desc: null });
@@ -219,7 +247,7 @@ router.post("/delete", function(req, res) {
     if (req.session) {
         if (req.session.passport.user) {
             User.findOneAndRemove({ username: req.body.name }, function(err, docs) {
-                if (docs === null) {
+                if (docs == null) {
                     res.json({ "message": "error" });
                 } else {
                     res.json({ "message": "success" });
@@ -277,7 +305,7 @@ router.post("/addproduct", function(req, res) {
             }).save(function(err, docs) {
                 console.log("docs ", docs);
                 console.log("err ", err);
-                if (docs === null) {
+                if (docs == null) {
                     res.json({ "message": "error" });
                 } else {
                     res.json({ error_code: 0, err_desc: null });
@@ -290,7 +318,8 @@ router.post("/addproduct", function(req, res) {
 
 router.post("/delproduct", function(req, res) {
     console.log("id", req.body.id);
-    Product.findOneAndRemove({ product_id: req.body.id }, function(err, docs) {
+    /*Product.findOneAndRemove*/
+    Product.update({ product_id: req.body.id }, { $set: { status: "deleted" } }, function(err, docs) {
         console.log("error ", err);
         console.log("data ", docs);
         if (docs == null) {
@@ -352,7 +381,7 @@ router.post("/uproduct", function(req, res) {
                 if (docs == "") {
                     res.json({ "message": err });
                 } else {
-                    res.json({ "message": "success" });
+                    res.json({ "message": "success", error_code: 0 });
                 }
             });
         }
@@ -361,6 +390,20 @@ router.post("/uproduct", function(req, res) {
 
 router.post("/orders", function(req, res) {
     console.log("req.body", req.body)
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+
+    if (dd < 10) {
+        dd = '0' + dd;
+    }
+
+    if (mm < 10) {
+        mm = '0' + mm;
+    }
+
+    today = mm + '/' + dd + '/' + yyyy;
     Product.find({ product_name: req.body.name }, function(err, docs) {
         console.log("docs", docs)
         if (docs == "") {
@@ -372,7 +415,8 @@ router.post("/orders", function(req, res) {
                 Order({
                     product_id: id,
                     product_price: price,
-                    user_id: req.session.passport.user
+                    user_id: req.session.passport.user,
+                    date: today
                 }).save(function(err, docs) {
                     if (err) {
                         res.json({ "message": "error" });

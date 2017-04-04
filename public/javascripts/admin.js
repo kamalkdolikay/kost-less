@@ -1,6 +1,6 @@
 var app = angular.module("KD", ['ngFileUpload', 'ui.bootstrap'])
 
-app.controller("main", function($scope, $http) {
+app.controller("main", function($scope, $http, $rootScope) {
     $scope.delusr = function() {
         $http.post("/delete", $scope.form)
             .success(function(data) {
@@ -87,6 +87,8 @@ app.controller("main", function($scope, $http) {
                 console.log("success", data)
                 if (data.message == "success") {
                     $scope.msg = "user deleted"
+                    alert("user deleted");
+                    window.location.reload();
                 }
                 if (data.message == "error") {
                     $scope.msg = "enter a valid user"
@@ -97,6 +99,22 @@ app.controller("main", function($scope, $http) {
             })
     };
 
+    $scope.addcat = function() {
+        $http.post("/productcat", $scope.form)
+            .success(function(data) {
+                console.log("success ", data)
+                if (data.message == "success") {
+                    $scope.msg = "category added"
+                }
+                if (data.message.code == 11000) {
+                    $scope.msg = "category already exists"
+                }
+            })
+            .error(function(data) {
+                console.log("error ", data)
+            })
+    }
+
     $http.get("/products")
         .then(function(res) {
             $scope.products = res.data;
@@ -106,6 +124,19 @@ app.controller("main", function($scope, $http) {
         .then(function(res) {
             $scope.users = res.data;
         });
+
+    $http.get("/getcat")
+        .then(function(res) {
+            $rootScope.category = res.data;
+        });
+
+    $scope.logout = function() {
+        $http.get("/logout")
+            .then(function(res) {
+                console.log(res)
+                window.location.href = 'http://localhost:3000/#/login2';
+            })
+    }
 })
 
 app.filter('startFrom', function() {
@@ -159,6 +190,8 @@ app.controller('PageCtrl', ['Upload', '$window', '$scope', '$rootScope', 'filter
                 console.log("success ", data);
                 if (data.message == "success") {
                     $scope.msg = "product deleted";
+                    alert("product deleted")
+                    window.location.reload()
                 }
             })
             .error(function(data) {
@@ -205,8 +238,9 @@ app.controller('PageCtrl', ['Upload', '$window', '$scope', '$rootScope', 'filter
             method: 'POST',
             data: $scope.form1
         }).then(function(resp) {
-            if (resp.data.error_code === 0) {
-                console.log(resp.config.data.file.name)
+            console.log("resp ", resp)
+            if (resp.data.message == "success") {
+                $window.alert('Product Updated');
             } else {
                 $window.alert('an error occured');
             }

@@ -33,36 +33,7 @@
 <body ng-app="K">
 
     <div class="wrapper">
-        <div class="sidebar" data-color="purple" data-image="../assets/img/sidebar-5.jpg">
-            <div class="sidebar-wrapper" ng-controller="MainCtrl">
-                <div class="logo">
-                    <a href="#" class="simple-text">
-                    Hello {{settings.username}}
-                </a>
-                </div>
-
-                <ul class="nav">
-                    <li>
-                        <a href="/dashboard">
-                            <i class="pe-7s-graph"></i>
-                            <p>Dashboard</p>
-                        </a>
-                    </li>
-                    <li class="active">
-                        <a href="/dashboard/user">
-                            <i class="pe-7s-user"></i>
-                            <p>User Profile</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/dashboard/orders">
-                            <i class="pe-7s-note2"></i>
-                            <p>Orders</p>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        <div ng-include="'/header.html'"></div>
 
         <div class="main-panel">
             <nav class="navbar navbar-default navbar-fixed">
@@ -78,12 +49,12 @@
                     </div>
                     <div class="collapse navbar-collapse">
                         <ul class="nav navbar-nav navbar-left">
-                            <li>
+                            <!--<li>
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="fa fa-dashboard"></i>
                                 </a>
-                            </li>
-                            <li class="dropdown">
+                            </li>-->
+                            <!--<li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <i class="fa fa-globe"></i>
                                     <b class="caret"></b>
@@ -96,7 +67,7 @@
                                     <li><a href="#">Notification 4</a></li>
                                     <li><a href="#">Another notification</a></li>
                                 </ul>
-                            </li>
+                            </li>-->
                             <li>
                                 <a href="">
                                     <i class="fa fa-search"></i>
@@ -105,30 +76,27 @@
                         </ul>
 
                         <ul class="nav navbar-nav navbar-right">
-                            <li>
+                            <!--<li>
                                 <a href="">
                                Account
                             </a>
-                            </li>
+                            </li>-->
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    Dropdown
+                                    Account
                                     <b class="caret"></b>
                               </a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#">Action</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something</a></li>
+                                    <li><a href="/dashboard">Dashboard</a></li>
+                                    <li><a href="/dashboard/user">Your Profile</a></li>
+                                    <li><a href="/dashboard/orders">Orders</a></li>
                                     <li class="divider"></li>
-                                    <li><a href="#">Separated link</a></li>
+                                    <li ng-controller="MainCtrl">
+                                        <a href="#" ng-click="logout()">
+                                            Log out
+                                        </a>
+                                    </li>
                                 </ul>
-                            </li>
-                            <li ng-controller="MainCtrl">
-                                <a href="#" ng-click="logout()">
-                                Log out
-                            </a>
                             </li>
                         </ul>
                     </div>
@@ -269,37 +237,7 @@
             </div>
 
 
-            <footer class="footer">
-                <div class="container-fluid">
-                    <nav class="pull-left">
-                        <ul>
-                            <li>
-                                <a href="#">
-                                Home
-                            </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                Company
-                            </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                Portfolio
-                            </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                               Blog
-                            </a>
-                            </li>
-                        </ul>
-                    </nav>
-                    <p class="copyright pull-right">
-                        &copy; 2016 <a href="#">Kreative</a>, made with love for a better web
-                    </p>
-                </div>
-            </footer>
+            <div ng-include="'/footer.html'"></div>
 
         </div>
     </div>
